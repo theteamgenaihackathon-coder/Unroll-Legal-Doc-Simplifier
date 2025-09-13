@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:legal_doc_simplifier/login_view.dart';
 import 'package:legal_doc_simplifier/widgets.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'firebase_options.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
-void main() {
+void main() async {
+ WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await FirebaseAuth.instance.signOut();
+  await GoogleSignIn().signOut();
+
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       // home: HomePage(),
-      home: LoginView(),
+      home: const LoginView(),
     );
   }
 }
