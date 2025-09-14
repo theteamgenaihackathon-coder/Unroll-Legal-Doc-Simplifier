@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legal_doc_simplifier/buttons.dart';
 import 'package:legal_doc_simplifier/login_view.dart';
 import 'package:legal_doc_simplifier/widgets.dart';
 
@@ -33,8 +34,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context),
-      body: myBody(context),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        surfaceTintColor: Colors.transparent,
+        elevation: 2,
+        shadowColor: Colors.black.withAlpha(200),
+        leading: menuButton(),
+        actions: [accountButton()],
+        title: Text(""),
+        centerTitle: true,
+      ),
+      body: HomeBody(),
       backgroundColor: Colors.white,
     );
   }
