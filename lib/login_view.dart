@@ -81,6 +81,7 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
                 // icon: Image.asset('assets/google_logo.png', height: 20),
+                icon: Image.asset('assets/icons/google_logo.png', height: 20),
                 label: Text('Continue with Google'),
                 onPressed: () async {
                   try {
@@ -98,7 +99,27 @@ class LoginView extends StatelessWidget {
                 },
               ),
               SizedBox(height: 12),
-              Center(child: Text('or')),
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                      indent: 16,
+                      endIndent: 8,
+                    ),
+                  ),
+                  Text("OR"),
+                  Expanded(
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                      indent: 8,
+                      endIndent: 16,
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 12),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
