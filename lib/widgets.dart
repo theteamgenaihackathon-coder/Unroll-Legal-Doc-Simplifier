@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:legal_doc_simplifier/buttons.dart';
-import 'package:legal_doc_simplifier/text_doc_from_json.dart';
+// import 'package:legal_doc_simplifier/text_doc_from_json.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
@@ -32,10 +32,14 @@ class HomeBody extends StatelessWidget {
             style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
           ),
         ),
-        FirstPointCard(),
+        // FirstPointCard(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [uploadButton(), addSpace(context, 0.25), cameraButton()],
+          children: [
+            uploadButton(context),
+            addSpace(context, 0.25),
+            cameraButton(),
+          ],
         ),
       ],
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:legal_doc_simplifier/buttons.dart';
 import 'package:legal_doc_simplifier/login_view.dart';
 import 'package:legal_doc_simplifier/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:legal_doc_simplifier/menu_popup.dart';
+// import 'package:legal_doc_simplifier/upload_page.dart';
 
 const Color ourRed = Color(0xFFC10547);
 void main() async {
