@@ -2,28 +2,19 @@ import 'package:flutter/material.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
-IconButton menuButton() {
-  return IconButton(
-    onPressed: () {},
-    icon: Icon(Icons.menu_rounded, color: ourRed, size: 50),
-    highlightColor: Colors.transparent,
-    visualDensity: VisualDensity(horizontal: 2, vertical: -2),
-  );
-}
+// IconButton accountButton() {
+//   // return IconButton(
+//   //   onPressed: () {},
+//   //   icon: Icon(Icons.account_circle_rounded, color: ourRed, size: 50),
+//   // );
 
-IconButton accountButton() {
-  // return IconButton(
-  //   onPressed: () {},
-  //   icon: Icon(Icons.account_circle_rounded, color: ourRed, size: 50),
-  // );
-
-  return IconButton(
-    onPressed: () {},
-    icon: Icon(Icons.account_circle_rounded, color: ourRed, size: 50),
-    visualDensity: VisualDensity(vertical: -2),
-    highlightColor: Colors.transparent,
-  );
-}
+//   return IconButton(
+//     onPressed: () {},
+//     icon: Icon(Icons.account_circle_rounded, color: ourRed, size: 50),
+//     visualDensity: VisualDensity(vertical: -2),
+//     highlightColor: Colors.transparent,
+//   );
+// }
 
 // PopupMenuButton accountButton() {
 //   return PopupMenuButton(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:legal_doc_simplifier/buttons.dart';
+// import 'package:legal_doc_simplifier/buttons.dart';
 import 'package:legal_doc_simplifier/login_view.dart';
 import 'package:legal_doc_simplifier/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:legal_doc_simplifier/menu_popup.dart';
 
 const Color ourRed = Color(0xFFC10547);
 void main() async {
@@ -13,7 +14,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await FirebaseAuth.instance.signOut();
-  await GoogleSignIn.instance.signOut();
+  await GoogleSignIn().signOut();
 
   runApp(const MyApp());
 }
@@ -43,16 +44,23 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        surfaceTintColor: Colors.transparent,
-        elevation: 2,
-        shadowColor: Colors.black.withAlpha(200),
-        leading: menuButton(),
-        actions: [accountButton()],
-        title: Text(""),
-        centerTitle: true,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          surfaceTintColor: Colors.transparent,
+          elevation: 2,
+          shadowColor: Colors.black.withAlpha(200),
+          actions: [
+            Padding(padding: EdgeInsets.only(right: 50)),
+            AccountButton(),
+          ],
+          title: Text(""),
+          centerTitle: true,
+        ),
       ),
       body: HomeBody(),
       backgroundColor: Colors.white,
