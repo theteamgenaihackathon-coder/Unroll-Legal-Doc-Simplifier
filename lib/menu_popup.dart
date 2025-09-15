@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AccountButton extends StatefulWidget {
-  const AccountButton({super.key});
+  final VoidCallback? onLogout;
+  final VoidCallback? onProfile;
+  const AccountButton({super.key, this.onProfile, this.onLogout});
 
   @override
   State<AccountButton> createState() => _AccountButtonState();
@@ -53,11 +55,15 @@ class _AccountButtonState extends State<AccountButton> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _buildMenuItem(Icons.account_circle_rounded, 'profile'),
-                    _buildMenuItem(Icons.history, 'History'),
-                    _buildMenuItem(Icons.bookmark, 'Saved'),
-                    _buildMenuItem(Icons.settings, 'Settings'),
-                    _buildMenuItem(Icons.logout, 'Logout'),
+                    _buildMenuItem(
+                      Icons.account_circle_rounded,
+                      'Profile',
+                      widget.onProfile,
+                    ),
+                    _buildMenuItem(Icons.history, 'History', null),
+                    _buildMenuItem(Icons.bookmark, 'Saved', null),
+                    _buildMenuItem(Icons.settings, 'Settings', null),
+                    _buildMenuItem(Icons.logout, 'Logout', widget.onLogout),
                   ],
                 ),
               ),
@@ -68,12 +74,12 @@ class _AccountButtonState extends State<AccountButton> {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String label) {
+  Widget _buildMenuItem(IconData icon, String label, VoidCallback? action) {
     return ListTile(
       leading: Icon(icon, color: Colors.pink, size: 50),
       title: Text(label),
       onTap: () {
-        print('$label tapped');
+        action?.call();
         _toggleDropdown(); // Close dropdown after selection
       },
     );
@@ -84,11 +90,7 @@ class _AccountButtonState extends State<AccountButton> {
     return CompositedTransformTarget(
       link: _layerLink,
       child: IconButton(
-        icon: const Icon(
-          Icons.account_circle_rounded,
-          size: 50,
-          color: Colors.pink,
-        ),
+        icon: Icon(Icons.account_circle_rounded, size: 50, color: Colors.pink),
         onPressed: _toggleDropdown,
       ),
     );

@@ -44,25 +44,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+      appBar: AppBar(
+        toolbarHeight: 80,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        surfaceTintColor: Colors.transparent,
+        elevation: 2,
+        shadowColor: Colors.black.withAlpha(200),
+        centerTitle: true,
+        title: const Text(""), // You can remove this if not needed
+
+        actions: [
+          const SizedBox(width: 0), // spacing before the button
+          Builder(
+            builder: (context) => AccountButton(
+              onProfile: () {
+                print('Profile tapped');
+              },
+              onLogout: () {
+                print('Logout tapped');
+              },
+            ),
           ),
-          surfaceTintColor: Colors.transparent,
-          elevation: 2,
-          shadowColor: Colors.black.withAlpha(200),
-          actions: [
-            Padding(padding: EdgeInsets.only(right: 50)),
-            AccountButton(),
-          ],
-          title: Text(""),
-          centerTitle: true,
-        ),
+
+          const SizedBox(width: 0), // spacing after the button
+        ],
       ),
-      body: HomeBody(),
+
+      body: const HomeBody(),
       backgroundColor: Colors.white,
     );
   }
