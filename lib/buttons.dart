@@ -29,7 +29,6 @@ IconButton uploadButton(BuildContext context) {
         final tempDir = await getTemporaryDirectory();
         final tempPath = '${tempDir.path}/${pickedFile.uri.pathSegments.last}';
         final tempFile = await pickedFile.copy(tempPath);
-        // print(tempPath);
 
         // print('PDF saved to temp: ${tempFile.path}');
 
