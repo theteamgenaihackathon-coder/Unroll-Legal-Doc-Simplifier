@@ -80,7 +80,7 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
       Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 50),
+          SizedBox(height: 30),
           Text(
             widget.title,
             style: TextStyle(
@@ -89,7 +89,7 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
               height: 1.2,
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           Divider(
             height: 4,
             thickness: 2,
@@ -147,23 +147,37 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
       Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              backButton(() {
-                widget.entry.remove();
-              }),
-              SizedBox(width: 20),
-              Container(
-                child: Text(
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Text(
                   'Simplified',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              ),
-            ],
+
+                // 2) Back button aligned to the right
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: backButton(() {
+                    widget.entry.remove();
+                  }),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 10),
-          // Replace with your actual simplified content
+
+          // const SizedBox(height: 10),
+          Divider(
+            height: 4,
+            thickness: 2,
+            indent: 20,
+            endIndent: 20,
+            color: Color.fromARGB(100, 227, 117, 117),
+          ),
+          const SizedBox(height: 70),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(

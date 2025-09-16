@@ -29,7 +29,7 @@ IconButton uploadButton(BuildContext context) {
         final tempDir = await getTemporaryDirectory();
         final tempPath = '${tempDir.path}/${pickedFile.uri.pathSegments.last}';
         final tempFile = await pickedFile.copy(tempPath);
-        print(tempPath);
+        // print(tempPath);
 
         // print('PDF saved to temp: ${tempFile.path}');
 
@@ -51,7 +51,7 @@ IconButton cameraButton() {
 IconButton backButton(VoidCallback onPressed) {
   return IconButton(
     onPressed: onPressed,
-    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 50),
+    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 30),
   );
 }
 

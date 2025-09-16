@@ -72,7 +72,6 @@ flutter:
     - assets/icons/google_logo.png
     - assets/icons/doubt.png
     - assets/icons/language_icon.png
-    -
   fonts:
     - family: ArchitectsDaughter
       fonts:
