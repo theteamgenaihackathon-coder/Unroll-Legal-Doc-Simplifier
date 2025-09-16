@@ -48,9 +48,23 @@ IconButton cameraButton() {
   );
 }
 
-IconButton backButton() {
+IconButton backButton(VoidCallback onPressed) {
+  return IconButton(
+    onPressed: onPressed,
+    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 50),
+  );
+}
+
+IconButton exampleButton() {
   return IconButton(
     onPressed: () {},
-    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 50),
+    icon: ImageIcon(AssetImage('assets/icons/doubt.png'), size: 50),
+  );
+}
+
+IconButton chooseLanguageButton() {
+  return IconButton(
+    onPressed: () {},
+    icon: ImageIcon(AssetImage('assets/icons/language_icon.png'), size: 50),
   );
 }

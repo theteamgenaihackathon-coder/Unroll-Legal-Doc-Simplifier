@@ -150,7 +150,9 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              backButton(),
+              backButton(() {
+                widget.entry.remove();
+              }),
               SizedBox(width: 20),
               Container(
                 child: Text(
@@ -173,7 +175,7 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
         ],
       ),
 
-      // ─── Page 2: Final / Confirmation ────────────────────────────
+      // ─── Page 2: example ────────────────────────────
       Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -189,15 +191,6 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
 
     return Stack(
       children: [
-        // Dismiss on outside tap
-        Positioned.fill(
-          child: GestureDetector(
-            onTap: widget.entry.remove,
-            child: Container(color: Colors.transparent),
-          ),
-        ),
-
-        // Centered overlay card
         Padding(
           padding: const EdgeInsets.only(top: 90),
           child: Center(
