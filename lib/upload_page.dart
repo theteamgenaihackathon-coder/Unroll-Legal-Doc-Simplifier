@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legal_doc_simplifier/buttons.dart';
+import 'package:legal_doc_simplifier/text_doc_from_json.dart';
 import 'dart:io';
 import 'package:pdfx/pdfx.dart';
 
@@ -152,24 +153,24 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
             children: [
               backButton(),
               SizedBox(width: 20),
-              Container(
-                child: Text(
-                  'Simplified',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+              Text(
+                'Simplified',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           ),
           const SizedBox(height: 10),
+          FirstPointCard(pdfFile: widget.pdfFile),
           // Replace with your actual simplified content
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Here you can show a simplified version of the PDF, '
-              'or any other custom UI you need.',
-              textAlign: TextAlign.center,
-            ),
-          ),
+
+          // Padding(
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: Text(
+          //     'Here you can show a simplified version of the PDF, '
+          //     'or any other custom UI you need.',
+          //     textAlign: TextAlign.center,
+          //   ),
+          // ),
         ],
       ),
 

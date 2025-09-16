@@ -8,7 +8,7 @@ import mimetypes
 app = FastAPI()
 
 PROJECT_NAME = "unroll-genai-hackathon-app"
-PROJECT_REGION = "asia-south1"
+PROJECT_REGION = "global"
 
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "true"
 os.environ["GOOGLE_CLOUD_PROJECT"] = PROJECT_NAME

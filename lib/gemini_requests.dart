@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
-Future<void> sendRequestToCloudRun(File file) async {
-  final url = Uri.parse('http://127.0.0.1:8000/simplify');
+Future<String> simplifyDoc(File file) async {
+  final url = Uri.parse('http://10.0.2.2:8000/simplify');
   // final headers = {
   //   'Content-Type': 'application/json',
   //   // 'Authorization': 'Bearer YOUR_IDENTITY_TOKEN', // Optional if public
@@ -13,12 +13,19 @@ Future<void> sendRequestToCloudRun(File file) async {
   // Optional: add headers if needed
   // request.headers['Authorization'] = 'Bearer YOUR_IDENTITY_TOKEN';
 
-  final response = await request.send();
+  final streamedResponse = await request.send();
+  // print(response);
 
-  if (response.statusCode == 200) {
-    final responseBody = await response.stream.bytesToString();
-    print('Gemini response: $responseBody');
-  } else {
-    print('Error: ${response.statusCode}');
-  }
+  final responseBody = await streamedResponse.stream.bytesToString();
+  print(responseBody);
+
+  return responseBody;
+  // if (responseBody.statusCode == 200) {
+  //   final responseBody = await response.stream.bytesToString();
+  //   return responseBody;
+  //   print('Gemini response: $responseBody');
+  // } else {
+  //   print('Error: ${response.statusCode}');
+  //   return '{}';
+  // }
 }
