@@ -11,7 +11,7 @@ import os
 
 # fileData = filePath.read_bytes()
 # mimeType = mimetypes.guess_type(filePath)[0]
-# file = Part.from_bytes(data=fileData,mime_type=mimeType)
+# file = Part.from_(data=fileData,mime_type=mimeType)
 
 # os.environ["GOOGLE_CLOUD_PROJECT"] = "unroll-genai-hackathon-app"
 # os.environ["GOOGLE_CLOUD_LOCATION"] = "global"

@@ -19,13 +19,16 @@ IconButton uploadButton(BuildContext context) {
       if (result != null && result.files.single.path != null) {
         final pickedFile = File(result.files.single.path!);
         // Show overlay
-        showUploadOverlay(context, 'confirm PDF', pickedFile);
+        showMultiPagePdfOverlay(
+          context,
+          title: 'Confirm PDF',
+          pdfFile: pickedFile,
+        );
 
         // Save to temp directory
         final tempDir = await getTemporaryDirectory();
         final tempPath = '${tempDir.path}/${pickedFile.uri.pathSegments.last}';
         final tempFile = await pickedFile.copy(tempPath);
-        print(tempPath);
 
         // print('PDF saved to temp: ${tempFile.path}');
 
@@ -41,5 +44,26 @@ IconButton cameraButton() {
   return IconButton(
     onPressed: () {},
     icon: Icon(Icons.camera_alt_rounded, color: ourRed, size: 80),
+  );
+}
+
+IconButton backButton(VoidCallback onPressed) {
+  return IconButton(
+    onPressed: onPressed,
+    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 30),
+  );
+}
+
+IconButton exampleButton() {
+  return IconButton(
+    onPressed: () {},
+    icon: ImageIcon(AssetImage('assets/icons/doubt.png'), size: 50),
+  );
+}
+
+IconButton chooseLanguageButton() {
+  return IconButton(
+    onPressed: () {},
+    icon: ImageIcon(AssetImage('assets/icons/language_icon.png'), size: 50),
   );
 }
