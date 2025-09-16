@@ -151,7 +151,7 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              backButton(),
+              // backButton(),
               SizedBox(width: 20),
               Container(
                 child: Text(
@@ -162,15 +162,18 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
             ],
           ),
           const SizedBox(height: 10),
+
+          FirstPointCard(pdfFile: widget.pdfFile),
+
           // Replace with your actual simplified content
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Here you can show a simplified version of the PDF, '
-              'or any other custom UI you need.',
-              textAlign: TextAlign.center,
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: Text(
+          //     'Here you can show a simplified version of the PDF, '
+          //     'or any other custom UI you need.',
+          //     textAlign: TextAlign.center,
+          //   ),
+          // ),
         ],
       ),
 
