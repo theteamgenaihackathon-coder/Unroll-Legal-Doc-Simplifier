@@ -19,7 +19,11 @@ IconButton uploadButton(BuildContext context) {
       if (result != null && result.files.single.path != null) {
         final pickedFile = File(result.files.single.path!);
         // Show overlay
-        showUploadOverlay(context, 'confirm PDF', pickedFile);
+        showMultiPagePdfOverlay(
+          context,
+          title: 'Confirm PDF',
+          pdfFile: pickedFile,
+        );
 
         // Save to temp directory
         final tempDir = await getTemporaryDirectory();
@@ -41,5 +45,12 @@ IconButton cameraButton() {
   return IconButton(
     onPressed: () {},
     icon: Icon(Icons.camera_alt_rounded, color: ourRed, size: 80),
+  );
+}
+
+IconButton backButton() {
+  return IconButton(
+    onPressed: () {},
+    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 50),
   );
 }
