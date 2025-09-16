@@ -1,0 +1,41 @@
+Backend
+
+
+flutter - requests.dart - change url to localhost given by fastapi
+			- check if u can remove authorization - identity token and about its publicity
+			- get the file from cache
+			- why did Karthik send the path of that file
+			- check if u need to compress files
+			- use a get request to get json thing from python api (change the text_doc_from json file)
+			- move stuff in tezt_doc_from_json file to requests.dart file
+
+python - requests.py 	- create a post func for flutter to send doc
+			- create a get func for flutter to get json file
+			- authenticate in terminal - gcloud auth application-default login
+			- app name is app
+		     	- change generativeai to ones given in simplify.py
+		     	- get environment variables
+		     	- set environment variables
+		     	- how many page file can I send through http - done - not a problem
+		     	- put json schema (refer simplify.py file)
+			- set system instructions (refer simplify.py file)
+			- guess mimetype
+			- take the file in a Fileresponse format
+			- read the Fileresponse object which returns a bytestream
+			- use part to convert the bytestream to file
+			- use function to upload the file, json schema, etc. to googleapi
+			- return a response in json as given by json schema
+
+Docker 			- check and replace the first line of docker json response
+			- find whether 2nd line - work dir should me loc of python file or loc of project root
+			- see what to run in last line of docker - what is the point of the last line - check it
+			- see where to save this file
+
+Requirements.txt	- check all the imports u have used in all py files
+			- see where to save this file
+
+Note: When deploying in cloud run, user a service account with Vertex AI User role.
+Note: Look into google storage buckets 	- do u have to create new bucket 
+					- does python file automatically create bucket
+Note: Check how to run uvicorn python file from cloud run
+			
