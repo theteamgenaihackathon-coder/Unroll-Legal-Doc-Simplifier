@@ -4,7 +4,6 @@ import 'package:legal_doc_simplifier/buttons.dart';
 import 'package:legal_doc_simplifier/text_doc_from_json.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 const Color ourRed = Color(0xFFC10547);
 
 class HomeBody extends StatelessWidget {
@@ -34,7 +33,7 @@ class HomeBody extends StatelessWidget {
             style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
           ),
         ),
-        FirstPointCard(),
+        // FirstPointCard(),
         Row(
   mainAxisAlignment: MainAxisAlignment.center,
   children: [
@@ -51,6 +50,7 @@ class HomeBody extends StatelessWidget {
     }),
   ],
 ),
+
 
       ],
     );

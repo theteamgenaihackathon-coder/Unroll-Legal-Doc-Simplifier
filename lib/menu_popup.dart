@@ -47,6 +47,7 @@ class _AccountButtonState extends State<AccountButton> {
             width: 220,
             child: CompositedTransformFollower(
               link: _layerLink,
+
               offset: const Offset(-100, 0),
               child: SizedBox(
                 width: 220,
@@ -106,12 +107,11 @@ class _AccountButtonState extends State<AccountButton> {
     return CompositedTransformTarget(
       link: _layerLink,
       child: IconButton(
-        icon: const Icon(Icons.account_circle_rounded, size: 50, color: Colors.pink),
+        icon: Icon(Icons.account_circle_rounded, size: 50, color: Colors.pink),
         onPressed: _toggleDropdown,
       ),
     );
   }
-
   List<Widget> _buildMenuItemsWithDividers(List<Widget> items) {
     List<Widget> separated = [];
     for (int i = 0; i < items.length; i++) {
@@ -137,4 +137,5 @@ class _AccountButtonState extends State<AccountButton> {
     }
     return separated;
   }
+
 }

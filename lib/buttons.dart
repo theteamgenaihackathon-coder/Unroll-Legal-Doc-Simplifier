@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:legal_doc_simplifier/upload_page.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -13,28 +15,58 @@ Widget cameraButton(VoidCallback onTap) {
   );
 }
 
-IconButton menuButton() {
+IconButton uploadButton(BuildContext context) {
   return IconButton(
-    onPressed: () {},
-    icon: Icon(Icons.menu_rounded, color: ourRed, size: 50),
-    highlightColor: Colors.transparent,
-    visualDensity: VisualDensity(horizontal: 2, vertical: -2),
-  );
-}
-
-IconButton accountButton() {
-  return IconButton(
-    onPressed: () {},
-    icon: Icon(Icons.account_circle_rounded, color: ourRed, size: 50),
-    visualDensity: VisualDensity(vertical: -2),
-    highlightColor: Colors.transparent,
-  );
-}
-
-IconButton uploadButton() {
-  return IconButton(
-    onPressed: () {},
     icon: Icon(Icons.arrow_circle_up_rounded, size: 80, color: ourRed),
+    onPressed: () async {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf'],
+      );
+
+      if (result != null && result.files.single.path != null) {
+        final pickedFile = File(result.files.single.path!);
+        // Show overlay
+        showMultiPagePdfOverlay(
+          context,
+          title: 'Confirm PDF',
+          pdfFile: pickedFile,
+        );
+
+        // Save to temp directory
+        final tempDir = await getTemporaryDirectory();
+        final tempPath = '${tempDir.path}/${pickedFile.uri.pathSegments.last}';
+        final tempFile = await pickedFile.copy(tempPath);
+
+        // print('PDF saved to temp: ${tempFile.path}');
+
+        // Navigate to preview page
+      } else {
+        print('No file selected');
+      }
+    },
+  );
+}
+
+IconButton cameraButton() {
+
+  return IconButton(
+    onPressed: () {},
+    icon: Icon(Icons.camera_alt_rounded, color: ourRed, size: 80),
+  );
+}
+
+IconButton backButton(VoidCallback onPressed) {
+  return IconButton(
+    onPressed: onPressed,
+    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 30),
+  );
+}
+
+IconButton exampleButton() {
+  return IconButton(
+    onPressed: () {},
+    icon: ImageIcon(AssetImage('assets/icons/doubt.png'), size: 50),
   );
 }
 
@@ -185,4 +217,11 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
     );
   }
+}
+
+IconButton chooseLanguageButton() {
+  return IconButton(
+    onPressed: () {},
+    icon: ImageIcon(AssetImage('assets/icons/language_icon.png'), size: 50),
+  );
 }

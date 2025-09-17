@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:legal_doc_simplifier/buttons.dart';
 import 'package:legal_doc_simplifier/login_view.dart';
 import 'package:legal_doc_simplifier/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
-import "menu_popup.dart";
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:legal_doc_simplifier/menu_popup.dart';
 
 const Color ourRed = Color(0xFFC10547);
 void main() async {
@@ -15,7 +15,7 @@ void main() async {
   await FirebaseAuth.instance.signOut();
 
   //await GoogleSignIn().signOut();//to be replaced with the logout thing
-
+  
   runApp(const MyApp());
 }
 
@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         surfaceTintColor: Colors.transparent,
@@ -54,7 +55,6 @@ class _HomePageState extends State<HomePage> {
         // actions: [accountButton()],
         title: Text(""),
         centerTitle: true,
-
         actions: [
           const SizedBox(width: 0), // spacing before the button
           Builder(
@@ -82,7 +82,8 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(width: 0), // spacing after the button
         ],
       ),
-      body: HomeBody(),
+
+      body: const HomeBody(),
       backgroundColor: Colors.white,
     );
   }

@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:legal_doc_simplifier/gemini_requests.dart';
+import 'package:legal_doc_simplifier/buttons.dart';
 
 Future<Map<String, dynamic>> loadJsonData() async {
   final String jsonString = await rootBundle.loadString(
@@ -59,21 +62,24 @@ class Subsection {
 }
 
 class FirstPointCard extends StatelessWidget {
-  const FirstPointCard({super.key});
+  final File pdfFile;
 
-  Future<String> getFirstPoint() async {
-    final String jsonString = await rootBundle.loadString(
-      'assets/jsons/temp.json',
-    );
+  const FirstPointCard({super.key, required this.pdfFile});
+
+  Future<String> getFirstPoint(File pdfFile) async {
+    final String jsonString = await simplifyDoc(pdfFile);
     final Map<String, dynamic> jsonData = json.decode(jsonString);
+    print(jsonData);
+    return jsonString;
 
-    return Document.fromJson(jsonData).sections[0].subsections[0].points[0];
+    // return Document.fromJson(jsonData).sections[0].subsections[0].points[0];
+    // return Document.fromJson(jsonData).sections[0];
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
-      future: getFirstPoint(),
+      future: getFirstPoint(pdfFile),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
