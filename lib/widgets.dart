@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:legal_doc_simplifier/buttons.dart';
-// import 'package:legal_doc_simplifier/text_doc_from_json.dart';
+import 'package:legal_doc_simplifier/text_doc_from_json.dart';
+import 'package:image_picker/image_picker.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
@@ -34,13 +35,23 @@ class HomeBody extends StatelessWidget {
         ),
         // FirstPointCard(),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            uploadButton(context),
-            addSpace(context, 0.25),
-            cameraButton(),
-          ],
-        ),
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    uploadButton(),
+    addSpace(context, 0.25),
+    cameraButton(() async {
+      final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (pickedFile != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Image captured!")),
+        );
+        // You can also store or navigate with the image here
+      }
+    }),
+  ],
+),
+
+
       ],
     );
   }

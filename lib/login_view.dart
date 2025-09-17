@@ -41,6 +41,11 @@ Future<UserCredential> signInWithGoogle() async {
 
   return userCredential;
 }
+Future<void> signOutFromGoogle() async {
+  await GoogleSignIn().signOut();           // Sign out from Google
+  await FirebaseAuth.instance.signOut();    // Sign out from Firebase
+}
+
 
 const Color softPink = Color.fromARGB(255, 245, 185, 192);
 
@@ -97,7 +102,7 @@ class LoginView extends StatelessWidget {
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Google Sign-In failed: $e")),
-                    );
+                    );//to reverse, when logout is clicked, it should return to the opening page
                   }
                   // TODO: Handle Google Sign-In
                 },
