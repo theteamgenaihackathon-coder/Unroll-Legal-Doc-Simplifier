@@ -3,10 +3,7 @@ Backend
 
 flutter - requests.dart - change url to localhost given by fastapi
 			- check if u can remove authorization - identity token and about its publicity
-			- get the file from cache
-			- why did Karthik send the path of that file
 			- check if u need to compress files
-			- use a get request to get json thing from python api (change the text_doc_from json file)
 			- move stuff in tezt_doc_from_json file to requests.dart file
 
 python - requests.py 	- create a post func for flutter to send doc
@@ -39,3 +36,10 @@ Note: Look into google storage buckets 	- do u have to create new bucket
 					- does python file automatically create bucket
 Note: Check how to run uvicorn python file from cloud run
 			
+
+
+17th Sept:
+
+In upload page try to use a future builder to get a 
+
+make camera_screen.dart more modular
