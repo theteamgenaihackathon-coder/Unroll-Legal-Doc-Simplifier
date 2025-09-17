@@ -5,7 +5,7 @@ import 'package:legal_doc_simplifier/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import "menu_popup.dart";
 
 const Color ourRed = Color(0xFFC10547);
 void main() async {
@@ -13,7 +13,8 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await FirebaseAuth.instance.signOut();
-  await GoogleSignIn.instance.signOut();
+
+  //await GoogleSignIn().signOut();//to be replaced with the logout thing
 
   runApp(const MyApp());
 }
@@ -50,9 +51,36 @@ class _HomePageState extends State<HomePage> {
         elevation: 2,
         shadowColor: Colors.black.withAlpha(200),
         leading: menuButton(),
-        actions: [accountButton()],
+        // actions: [accountButton()],
         title: Text(""),
         centerTitle: true,
+
+        actions: [
+          const SizedBox(width: 0), // spacing before the button
+          Builder(
+            builder: (context) => AccountButton(
+              onProfile: () {
+                print('Profile tapped');
+              },
+              onLogout: () async {
+  try {
+    await signOutFromGoogle(); // your helper method
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginView()),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Logout failed: $e")),
+    );
+  }
+},
+
+            ),
+          ),
+
+          const SizedBox(width: 0), // spacing after the button
+        ],
       ),
       body: HomeBody(),
       backgroundColor: Colors.white,

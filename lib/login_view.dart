@@ -8,14 +8,19 @@ import 'package:legal_doc_simplifier/main.dart';
 
 Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
-  final GoogleSignInAccount googleUser = await GoogleSignIn.instance
-      .authenticate();
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  if (googleUser == null) {
+    throw Exception("Google Sign-In aborted");
+  }
 
   // Get Google authentication details
-  final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+  final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
   // Create a new credential
-  final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken);
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth.accessToken,
+    idToken: googleAuth.idToken,
+  );
 
   // Sign in with Firebase
   final userCredential = await FirebaseAuth.instance.signInWithCredential(
@@ -37,6 +42,11 @@ Future<UserCredential> signInWithGoogle() async {
 
   return userCredential;
 }
+Future<void> signOutFromGoogle() async {
+  await GoogleSignIn().signOut();           // Sign out from Google
+  await FirebaseAuth.instance.signOut();    // Sign out from Firebase
+}
+
 
 const Color softPink = Color.fromARGB(255, 245, 185, 192);
 
@@ -93,7 +103,7 @@ class LoginView extends StatelessWidget {
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Google Sign-In failed: $e")),
-                    );
+                    );//to reverse, when logout is clicked, it should return to the opening page
                   }
                   // TODO: Handle Google Sign-In
                 },
