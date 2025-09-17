@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:legal_doc_simplifier/main.dart';
+import 'package:legal_doc_simplifier/views/loginpage/google_button.dart';
+import 'package:legal_doc_simplifier/views/loginpage/guest_button.dart';
 
 Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
@@ -41,11 +42,11 @@ Future<UserCredential> signInWithGoogle() async {
 
   return userCredential;
 }
-Future<void> signOutFromGoogle() async {
-  await GoogleSignIn().signOut();           // Sign out from Google
-  await FirebaseAuth.instance.signOut();    // Sign out from Firebase
-}
 
+Future<void> signOutFromGoogle() async {
+  await GoogleSignIn().signOut(); // Sign out from Google
+  await FirebaseAuth.instance.signOut(); // Sign out from Firebase
+}
 
 const Color softPink = Color.fromARGB(255, 245, 185, 192);
 
@@ -79,34 +80,7 @@ class LoginView extends StatelessWidget {
 
               Center(child: Text("Enter your email to sign up for this app")),
               SizedBox(height: 24),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: softPink,
-                  foregroundColor: Colors.black,
-                  minimumSize: Size(double.infinity, 48),
-                  side: BorderSide(color: Colors.grey.shade300),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                // icon: Image.asset('assets/google_logo.png', height: 20),
-                icon: Image.asset('assets/icons/google_logo.png', height: 20),
-                label: Text('Continue with Google'),
-                onPressed: () async {
-                  try {
-                    await signInWithGoogle();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (_) => HomePage()),
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Google Sign-In failed: $e")),
-                    );//to reverse, when logout is clicked, it should return to the opening page
-                  }
-                  // TODO: Handle Google Sign-In
-                },
-              ),
+              googleButton(context),
               SizedBox(height: 12),
               Row(
                 children: [
@@ -130,24 +104,7 @@ class LoginView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 12),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey.shade100,
-                  foregroundColor: Colors.black,
-                  minimumSize: Size(double.infinity, 48),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                icon: Icon(Icons.person_outline),
-                label: Text('Continue as guest'),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => HomePage()),
-                  );
-                },
-              ),
+              guestButton(context),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               Text.rich(
                 textAlign: TextAlign.center,

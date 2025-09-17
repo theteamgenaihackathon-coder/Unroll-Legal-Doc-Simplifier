@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:legal_doc_simplifier/buttons.dart';
-import 'package:legal_doc_simplifier/text_doc_from_json.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
+import 'package:legal_doc_simplifier/views/homepage/upload_button.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
@@ -33,30 +33,25 @@ class HomeBody extends StatelessWidget {
             style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
           ),
         ),
-        // FirstPointCard(),
         Row(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-    uploadButton(),
-    addSpace(context, 0.25),
-    cameraButton(() async {
-      final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (pickedFile != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Image captured!")),
-        );
-        // You can also store or navigate with the image here
-      }
-    }),
-  ],
-),
-
-
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            uploadButton(context),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.25),
+            cameraButton(() async {
+              final pickedFile = await ImagePicker().pickImage(
+                source: ImageSource.camera,
+              );
+              if (pickedFile != null) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text("Image captured!")));
+                // You can also store or navigate with the image here
+              }
+            }),
+          ],
+        ),
       ],
     );
   }
-}
-
-SizedBox addSpace(BuildContext context, double percent) {
-  return SizedBox(width: MediaQuery.of(context).size.width * percent);
 }
