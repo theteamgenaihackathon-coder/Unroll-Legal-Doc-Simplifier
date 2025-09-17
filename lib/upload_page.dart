@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:legal_doc_simplifier/buttons.dart';
-import 'package:legal_doc_simplifier/text_doc_from_json.dart';
 import 'dart:io';
 import 'package:pdfx/pdfx.dart';
 
@@ -148,32 +147,45 @@ class _MultiPagePdfOverlayState extends State<_MultiPagePdfOverlay> {
       Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // backButton(),
-              SizedBox(width: 20),
-              Container(
-                child: Text(
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Text(
                   'Simplified',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              ),
-            ],
+
+                // 2) Back button aligned to the right
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: backButton(() {
+                    widget.entry.remove();
+                  }),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 10),
 
-          FirstPointCard(pdfFile: widget.pdfFile),
-
-          // Replace with your actual simplified content
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Text(
-          //     'Here you can show a simplified version of the PDF, '
-          //     'or any other custom UI you need.',
-          //     textAlign: TextAlign.center,
-          //   ),
-          // ),
+          // const SizedBox(height: 10),
+          Divider(
+            height: 4,
+            thickness: 2,
+            indent: 20,
+            endIndent: 20,
+            color: Color.fromARGB(100, 227, 117, 117),
+          ),
+          const SizedBox(height: 70),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Here you can show a simplified version of the PDF, '
+              'or any other custom UI you need.',
+              textAlign: TextAlign.center,
+            ),
+          ),
         ],
       ),
 
