@@ -65,8 +65,12 @@ class LoginView extends StatelessWidget {
             children: [
               Center(
                 child: Text(
-                  'App name',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  "UNROLL",
+                  style: TextStyle(
+                    fontFamily: 'ComingSoon',
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               SizedBox(height: 32),

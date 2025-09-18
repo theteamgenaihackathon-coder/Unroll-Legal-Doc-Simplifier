@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
+import 'package:legal_doc_simplifier/views/loginpage/google_button.dart';
+import 'package:legal_doc_simplifier/views/loginpage/guest_button.dart';
 
 class AccountButton extends StatefulWidget {
   final VoidCallback? onLogout;
   final VoidCallback? onProfile;
-  const AccountButton({super.key, this.onProfile, this.onLogout});
+
+  AccountButton({super.key, this.onProfile, this.onLogout});
 
   @override
   State<AccountButton> createState() => _AccountButtonState();
 }
 
 class _AccountButtonState extends State<AccountButton> {
+  late final user = FirebaseAuth.instance.currentUser;
+  late final bool isGuest = user?.isAnonymous ?? false;
+
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
 
@@ -67,7 +77,13 @@ class _AccountButtonState extends State<AccountButton> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: _buildMenuItemsWithDividers([
-                        _buildMenuItem(Icons.account_circle_rounded, 'Profile', widget.onProfile),
+                        _buildMenuItem(
+                          Icons.account_circle_rounded,
+                          isGuest
+                              ? 'Guest'
+                              : '${user?.displayName ?? 'Guest'}\n${user?.email ?? '-------'}',
+                          null,
+                        ),
                         _buildMenuItem(Icons.history, 'History', null),
                         _buildMenuItem(Icons.bookmark, 'Saved', null),
                         _buildMenuItem(Icons.settings, 'Settings', null),
@@ -87,13 +103,14 @@ class _AccountButtonState extends State<AccountButton> {
   Widget _buildMenuItem(IconData icon, String label, VoidCallback? action) {
     return ListTile(
       leading: Icon(icon, color: Colors.pink, size: 50),
-     title: Text(
-  label,
-  style: TextStyle(
-    fontFamily: 'ComingSoon',
-    fontWeight: FontWeight.w600, // or FontWeight.bold, FontWeight.w500, etc.
-  ),
-),
+      title: Text(
+        label,
+        style: TextStyle(
+          fontFamily: 'ComingSoon',
+          fontWeight:
+              FontWeight.w600, // or FontWeight.bold, FontWeight.w500, etc.
+        ),
+      ),
 
       onTap: () {
         action?.call();
@@ -112,6 +129,7 @@ class _AccountButtonState extends State<AccountButton> {
       ),
     );
   }
+
   List<Widget> _buildMenuItemsWithDividers(List<Widget> items) {
     List<Widget> separated = [];
     for (int i = 0; i < items.length; i++) {
@@ -137,5 +155,4 @@ class _AccountButtonState extends State<AccountButton> {
     }
     return separated;
   }
-
 }
