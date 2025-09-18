@@ -5,7 +5,7 @@ Future<File?> pickImageFromCamera() async {
   final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
   return pickedFile != null ? File(pickedFile.path) : null;
 }
-
+//commented today
 void removeImageAt(List<File> imageFiles, int index) {
   imageFiles.removeAt(index);
 }
