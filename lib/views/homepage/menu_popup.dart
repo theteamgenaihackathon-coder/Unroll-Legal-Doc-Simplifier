@@ -60,14 +60,18 @@ class _AccountButtonState extends State<AccountButton> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: const Color.fromRGBO(238, 109, 154, 1),
+                        color: const Color(0xFFC10547),
                         width: 2,
                       ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: _buildMenuItemsWithDividers([
-                        _buildMenuItem(Icons.account_circle_rounded, 'Profile', widget.onProfile),
+                        _buildMenuItem(
+                          Icons.account_circle_rounded,
+                          'Profile',
+                          widget.onProfile,
+                        ),
                         _buildMenuItem(Icons.history, 'History', null),
                         _buildMenuItem(Icons.bookmark, 'Saved', null),
                         _buildMenuItem(Icons.settings, 'Settings', null),
@@ -86,14 +90,15 @@ class _AccountButtonState extends State<AccountButton> {
 
   Widget _buildMenuItem(IconData icon, String label, VoidCallback? action) {
     return ListTile(
-      leading: Icon(icon, color: Colors.pink, size: 50),
-     title: Text(
-  label,
-  style: TextStyle(
-    fontFamily: 'ComingSoon',
-    fontWeight: FontWeight.w600, // or FontWeight.bold, FontWeight.w500, etc.
-  ),
-),
+      leading: Icon(icon, color: const Color(0xFFC10547), size: 50),
+      title: Text(
+        label,
+        style: TextStyle(
+          fontFamily: 'ComingSoon',
+          fontWeight:
+              FontWeight.w600, // or FontWeight.bold, FontWeight.w500, etc.
+        ),
+      ),
 
       onTap: () {
         action?.call();
@@ -107,11 +112,16 @@ class _AccountButtonState extends State<AccountButton> {
     return CompositedTransformTarget(
       link: _layerLink,
       child: IconButton(
-        icon: Icon(Icons.account_circle_rounded, size: 50, color: Colors.pink),
+        icon: Icon(
+          Icons.account_circle_rounded,
+          size: 50,
+          color: const Color(0xFFC10547),
+        ),
         onPressed: _toggleDropdown,
       ),
     );
   }
+
   List<Widget> _buildMenuItemsWithDividers(List<Widget> items) {
     List<Widget> separated = [];
     for (int i = 0; i < items.length; i++) {
@@ -127,7 +137,7 @@ class _AccountButtonState extends State<AccountButton> {
                   endIndent: 50,
                   height: 1,
                   thickness: 1,
-                  color: const Color.fromRGBO(193, 5, 71, 1),
+                  color: const Color(0xFFC10547),
                 ),
               ),
             ],
@@ -137,5 +147,4 @@ class _AccountButtonState extends State<AccountButton> {
     }
     return separated;
   }
-
 }
