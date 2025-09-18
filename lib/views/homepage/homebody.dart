@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,7 +9,10 @@ import 'package:legal_doc_simplifier/views/homepage/upload_button.dart';
 const Color ourRed = Color(0xFFC10547);
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
+  final void Function(File) onFilePicked;
+  const HomeBody({super.key, required this.onFilePicked});
+
+  // const HomeBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +41,7 @@ class HomeBody extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            UploadButton(),
+            UploadButton(onFilePicked: onFilePicked),
             SizedBox(width: MediaQuery.of(context).size.width * 0.25),
             CameraButton(
               onPressed: () async {
