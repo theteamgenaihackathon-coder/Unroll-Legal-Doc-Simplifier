@@ -43,3 +43,5 @@ Note: Check how to run uvicorn python file from cloud run
 In upload page try to use a future builder to get a 
 
 make camera_screen.dart more modular
+
+

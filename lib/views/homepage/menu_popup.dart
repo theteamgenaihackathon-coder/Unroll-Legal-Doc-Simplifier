@@ -67,7 +67,11 @@ class _AccountButtonState extends State<AccountButton> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: _buildMenuItemsWithDividers([
-                        _buildMenuItem(Icons.account_circle_rounded, 'Profile', widget.onProfile),
+                        _buildMenuItem(
+                          Icons.account_circle_rounded,
+                          'Profile',
+                          widget.onProfile,
+                        ),
                         _buildMenuItem(Icons.history, 'History', null),
                         _buildMenuItem(Icons.bookmark, 'Saved', null),
                         _buildMenuItem(Icons.settings, 'Settings', null),
@@ -87,13 +91,14 @@ class _AccountButtonState extends State<AccountButton> {
   Widget _buildMenuItem(IconData icon, String label, VoidCallback? action) {
     return ListTile(
       leading: Icon(icon, color: Colors.pink, size: 50),
-     title: Text(
-  label,
-  style: TextStyle(
-    fontFamily: 'ComingSoon',
-    fontWeight: FontWeight.w600, // or FontWeight.bold, FontWeight.w500, etc.
-  ),
-),
+      title: Text(
+        label,
+        style: TextStyle(
+          fontFamily: 'ComingSoon',
+          fontWeight:
+              FontWeight.w600, // or FontWeight.bold, FontWeight.w500, etc.
+        ),
+      ),
 
       onTap: () {
         action?.call();
@@ -112,6 +117,7 @@ class _AccountButtonState extends State<AccountButton> {
       ),
     );
   }
+
   List<Widget> _buildMenuItemsWithDividers(List<Widget> items) {
     List<Widget> separated = [];
     for (int i = 0; i < items.length; i++) {
@@ -137,5 +143,4 @@ class _AccountButtonState extends State<AccountButton> {
     }
     return separated;
   }
-
 }

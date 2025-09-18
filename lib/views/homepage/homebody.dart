@@ -32,7 +32,7 @@ class HomeBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text(
+          child: const Text(
             "GET STARTED WITH A DOCUMENT NOW !!!",
             style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
           ),
@@ -40,7 +40,7 @@ class HomeBody extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            uploadButton(context),
+            UploadButton(),
             SizedBox(width: MediaQuery.of(context).size.width * 0.25),
             cameraButton((List<File> imageFiles) async {
               final pdfFile = await generatePdfToTemp(imageFiles);

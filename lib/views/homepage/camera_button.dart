@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
+
 Widget cameraButton(Function(List<File>) onDoneCapturing) {
   return IconButton(
     icon: Icon(Icons.camera_alt_rounded, color: ourRed, size: 80),
