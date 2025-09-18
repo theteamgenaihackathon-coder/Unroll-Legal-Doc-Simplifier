@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
 import 'package:legal_doc_simplifier/views/homepage/upload_button.dart';
-import 'package:legal_doc_simplifier/views/upload_screen/show_pdf_overlay.dart';
+// import 'package:legal_doc_simplifier/views/upload_screen/show_pdf_overlay.dart';
 import 'package:legal_doc_simplifier/views/camera_screen/pdf_generator.dart';
 
 const Color ourRed = Color(0xFFC10547);
@@ -47,7 +47,7 @@ class HomeBody extends StatelessWidget {
           children: [
             UploadButton(onFilePicked: onFilePicked),
             SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-            cameraButton((List<File> imageFiles) async {
+            CameraButton((List<File> imageFiles) async {
               final pdfFile = await generatePdfToTemp(imageFiles);
 
               if (pdfFile.existsSync()) {
