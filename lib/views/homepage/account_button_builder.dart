@@ -11,12 +11,8 @@ Builder buildAccountButton() {
       },
       onLogout: () async {
         try {
-          // await signOutFromGoogle(); // your helper method
           await GoogleSignIn().signOut();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const LoginView()),
-          );
+          Navigator.pushReplacementNamed(context, '/');
         } catch (e) {
           ScaffoldMessenger.of(
             context,

@@ -28,7 +28,7 @@ class HomeBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text(
+          child: const Text(
             "GET STARTED WITH A DOCUMENT NOW !!!",
             style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
           ),
@@ -36,19 +36,21 @@ class HomeBody extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            uploadButton(context),
+            UploadButton(),
             SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-            cameraButton(() async {
-              final pickedFile = await ImagePicker().pickImage(
-                source: ImageSource.camera,
-              );
-              if (pickedFile != null) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text("Image captured!")));
-                // You can also store or navigate with the image here
-              }
-            }),
+            CameraButton(
+              onPressed: () async {
+                final pickedFile = await ImagePicker().pickImage(
+                  source: ImageSource.camera,
+                );
+                if (pickedFile != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: const Text("Image captured!")),
+                  );
+                  // You can also store or navigate with the image here
+                }
+              },
+            ),
           ],
         ),
       ],

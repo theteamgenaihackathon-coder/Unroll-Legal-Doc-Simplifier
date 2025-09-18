@@ -74,7 +74,7 @@ class _CameraScreenState extends State<CameraScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              cameraButton(_handlePickImage),
+              CameraButton(onPressed: _handlePickImage),
               const SizedBox(height: 20),
               if (_imageFiles.isNotEmpty)
                 Expanded(

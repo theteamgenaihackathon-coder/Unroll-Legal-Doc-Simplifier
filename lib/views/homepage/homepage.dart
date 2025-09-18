@@ -20,13 +20,9 @@ class _HomePageState extends State<HomePage> {
         surfaceTintColor: Colors.transparent,
         elevation: 2,
         shadowColor: Colors.black.withAlpha(200),
-        title: Text("Unroll"),
+        title: const Text("Unroll"),
         centerTitle: true,
-        actions: [
-          const SizedBox(width: 0), // spacing before the button
-          buildAccountButton(),
-          const SizedBox(width: 0), // spacing after the button
-        ],
+        actions: [buildAccountButton()],
       ),
 
       body: const HomeBody(),

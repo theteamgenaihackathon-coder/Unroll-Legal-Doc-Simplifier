@@ -14,5 +14,8 @@ Future<String> simplifyDocRequest(File file) async {
   final streamedResponse = await request.send();
   final responseBody = await streamedResponse.stream.bytesToString();
 
+  print("\n\n\n");
+  print(responseBody);
+  print("\n\n\n");
   return responseBody;
 }

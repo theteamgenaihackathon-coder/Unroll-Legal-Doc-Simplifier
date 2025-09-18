@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
-import 'package:legal_doc_simplifier/views/upload_screen/divider.dart';
+import 'package:legal_doc_simplifier/views/upload_screen/overlays/divider.dart';
 
 class PdfPreviewPage extends StatelessWidget {
   final String title;

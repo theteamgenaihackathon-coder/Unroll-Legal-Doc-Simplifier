@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:legal_doc_simplifier/views/upload_screen/pages/final_page.dart';
 import 'package:pdfx/pdfx.dart';
 import 'dart:io';
 import 'pdf_preview_page.dart';
-import 'pages/simplified_page.dart';
-import 'pages/final_page.dart';
+import '../pages/simplified_page/simplified_page.dart';
 
 class PdfOverlay extends StatefulWidget {
   final OverlayEntry entry;
@@ -64,7 +64,10 @@ class _PagePdfOverlayState extends State<PdfOverlay> {
         onNext: _goNext,
         onBack: _goBack,
       ),
-      SimplifiedPage(onClose: () => widget.entry.remove()),
+      SimplifiedPage(
+        onClose: () => widget.entry.remove(),
+        pdfFile: widget.pdfFile,
+      ),
       FinalPage(),
     ];
 
