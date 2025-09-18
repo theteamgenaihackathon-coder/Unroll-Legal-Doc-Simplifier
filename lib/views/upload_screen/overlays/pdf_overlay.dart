@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/example_button.dart';
-import 'package:legal_doc_simplifier/views/upload_screen/language_button.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/final_page/final_page.dart';
 import 'package:pdfx/pdfx.dart';
 import 'dart:io';
 import '../pages/preview_page/pdf_preview_page.dart';
 import '../pages/simplified_page/simplified_page.dart';
 
-class PdfOverlay extends StatefulWidget {
-  final OverlayEntry entry;
+class PagePdf extends StatefulWidget {
   final String title;
   final File pdfFile;
+  final VoidCallback onClose; // optional if you want a back button
 
-  const PdfOverlay({
+  const PagePdf({
     super.key,
-    required this.entry,
     required this.title,
     required this.pdfFile,
+    required this.onClose,
   });
 
   @override
-  State<PdfOverlay> createState() => _PagePdfOverlayState();
+  State<PagePdf> createState() => _PagePdfState();
 }
 
-class _PagePdfOverlayState extends State<PdfOverlay> {
+class _PagePdfState extends State<PagePdf> {
   late PdfControllerPinch _pdfController;
   int _currentPage = 0;
   bool _isChatOpen = false;
   double _overlayHeight = 725;
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -40,6 +41,8 @@ class _PagePdfOverlayState extends State<PdfOverlay> {
   @override
   void dispose() {
     _pdfController.dispose();
+    _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -48,13 +51,21 @@ class _PagePdfOverlayState extends State<PdfOverlay> {
       _isChatOpen = !_isChatOpen;
       _overlayHeight = _isChatOpen ? 600 : 725; // shrink when chat opens
     });
+
+    if (_isChatOpen) {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _focusNode.requestFocus();
+      });
+    } else {
+      _focusNode.unfocus();
+    }
   }
 
   void _goNext() {
     if (_currentPage < 2) {
       setState(() => _currentPage++);
     } else {
-      widget.entry.remove();
+      widget.onClose();
     }
   }
 
@@ -62,7 +73,7 @@ class _PagePdfOverlayState extends State<PdfOverlay> {
     if (_currentPage > 0) {
       setState(() => _currentPage--);
     } else {
-      widget.entry.remove();
+      widget.onClose();
     }
   }
 
@@ -71,13 +82,13 @@ class _PagePdfOverlayState extends State<PdfOverlay> {
     final pages = [
       PdfPreviewPage(
         title: widget.title,
-        controller: _pdfController,
+        // controller: _pdfController,
         onNext: _goNext,
         onBack: _goBack,
       ),
       SimplifiedPage(
-        onClose: () => widget.entry.remove(),
-        pdfFile: widget.pdfFile,
+        onClose: () => "",
+        // pdfFile: widget.pdfFile,
         onToggleChat: toggleChatMode,
       ),
       FinalPage(),
@@ -117,6 +128,8 @@ class _PagePdfOverlayState extends State<PdfOverlay> {
                             children: [
                               Expanded(
                                 child: TextField(
+                                  focusNode: _focusNode,
+                                  controller: _controller,
                                   decoration: InputDecoration(
                                     hintText: "Type your message...",
                                     border: OutlineInputBorder(
