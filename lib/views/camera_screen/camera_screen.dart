@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:legal_doc_simplifier/views/camera_screen/image_preview.dart';
 import 'package:legal_doc_simplifier/views/camera_screen/pdf_generator.dart';
-import 'package:legal_doc_simplifier/views/camera_screen/pick_camera_image.dart';
 import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
 import 'package:path_provider/path_provider.dart';
 
