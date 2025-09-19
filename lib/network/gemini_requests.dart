@@ -26,3 +26,18 @@ Future<String> simplifyDocRequest(File file) async {
   print("\n\n\n");
   return responseBody;
 }
+
+/// ✅ New: Request to translate the simplified document
+Future<String> translateSimplifiedRequest(String targetLang) async {
+  final url = Uri.parse(
+      'http://10.0.2.2:8000/translate_simplified?target_lang=$targetLang');
+
+  final response = await http.post(url);
+
+  if (response.statusCode == 200) {
+    print("\n[Translation Response]\n${response.body}\n");
+    return response.body;
+  } else {
+    throw Exception("Translation failed: ${response.body}");
+  }
+}
