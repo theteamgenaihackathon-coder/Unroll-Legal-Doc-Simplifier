@@ -6,7 +6,6 @@ import 'package:legal_doc_simplifier/views/homepage/homebody.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/final_page/final_page.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/preview_page/pdf_preview_page.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/simplified_page/simplified_page.dart';
-import 'package:pdfx/pdfx.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,11 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // late Widget _activeBody = HomeBody(onFilePicked: showPdfPreview);
   int _currentPage = 0;
   bool _isChatOpen = false;
-  double _overlayHeight = 725;
-  // late PdfControllerPinch _pdfController;
 
   List<Widget> get pages => [
     HomeBody(onFilePicked: showPdfPreview, onDoneCapturing: showPdfPreview),
@@ -33,10 +29,6 @@ class _HomePageState extends State<HomePage> {
   ];
 
   void showPdfPreview(File pdfFile) {
-    // final controller = PdfControllerPinch(
-    //   document: PdfDocument.openFile(pdfFile.path),
-    // );
-
     setState(() {
       _currentPage = 1;
     });
@@ -45,7 +37,6 @@ class _HomePageState extends State<HomePage> {
   void toggleChatMode() {
     setState(() {
       _isChatOpen = !_isChatOpen;
-      _overlayHeight = _isChatOpen ? 600 : 725; // shrink when chat opens
     });
   }
 
@@ -63,18 +54,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final pages = [
-    //   PdfPreviewPage(
-    //     // title: widget.title,
-    //     title: "",
-    //     // controller: _pdfController,
-    //     onNext: _goNext,
-    //     onBack: _goBack,
-    //   ),
-    //   SimplifiedPage(onClose: () {}, onToggleChat: toggleChatMode),
-    //   FinalPage(),
-    // ];
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,

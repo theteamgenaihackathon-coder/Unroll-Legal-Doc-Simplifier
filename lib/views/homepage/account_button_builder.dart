@@ -5,15 +5,15 @@ import 'package:legal_doc_simplifier/views/homepage/menu_popup.dart';
 Builder buildAccountButton() {
   return Builder(
     builder: (context) => AccountButton(
-      onProfile: () {
-        print('Profile tapped');
-      },
+      onProfile: () {},
       onLogout: () async {
         try {
           await GoogleSignIn().signOut();
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacementNamed(context, '/');
         } catch (e) {
           ScaffoldMessenger.of(
+            // ignore: use_build_context_synchronously
             context,
           ).showSnackBar(SnackBar(content: Text("Logout failed: $e")));
         }

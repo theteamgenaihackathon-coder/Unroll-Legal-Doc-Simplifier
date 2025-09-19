@@ -14,10 +14,6 @@ Future<String> simplifyDocRequest(File file) async {
   final request = http.MultipartRequest('POST', url)
     ..files.add(await http.MultipartFile.fromPath('file', file.path));
   final streamedResponse = await request.send();
-  // final stream = streamedResponse.stream.transform(const Utf8Decoder());
-  // await for (final chunk in stream) {
-  //   yield chunk; // Emit each chunk as it arrives
-  // }
 
   final responseBody = await streamedResponse.stream.bytesToString();
 

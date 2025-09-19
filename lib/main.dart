@@ -4,7 +4,6 @@ import 'package:legal_doc_simplifier/views/loginpage/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
-import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
 
 const Color ourRed = Color(0xFFC10547);
 void main() async {
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
- 
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginView(),

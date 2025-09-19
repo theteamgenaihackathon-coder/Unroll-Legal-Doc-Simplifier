@@ -1,9 +1,9 @@
+// Return a Scrollable Text to be Displayed in Simplified Page
+
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:legal_doc_simplifier/network/gemini_requests.dart';
-import 'package:legal_doc_simplifier/views/upload_screen/pages/simplified_page/extract_text.dart';
 import 'content_styling.dart';
 
 class SimplifiedDocView extends StatelessWidget {

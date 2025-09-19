@@ -1,3 +1,5 @@
+// Get the usable part from the Json response
+
 import 'dart:convert';
 
 String extractTextFromJson(String jsonString) {

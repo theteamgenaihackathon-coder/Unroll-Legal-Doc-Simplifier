@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/example_button.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/language_button.dart';
+import 'package:legal_doc_simplifier/views/upload_screen/pages/simplified_page/fill_button.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/simplified_page/scroll_view.dart';
 import 'package:legal_doc_simplifier/views/homepage/back_button.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/overlays/divider.dart';
@@ -67,6 +68,7 @@ class _SimplifiedPageState extends State<SimplifiedPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          // fillButton(),
                           chooseLanguageButton(),
                           exampleButton(shrinkDocView),
                         ],
