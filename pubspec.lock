@@ -196,12 +196,11 @@ packages:
   file_picker:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "36eccd13e24a7f86d1745d2c7fa274f416051c7c"
-      url: "https://github.com/millatip/mobileCDR.git"
-    source: git
-    version: "8.1.3"
+      name: file_picker
+      sha256: ab13ae8ef5580a411c458d6207b6774a6c237d77ac37011b13994879f68a8810
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.3.7"
   file_selector_linux:
     dependency: transitive
     description:

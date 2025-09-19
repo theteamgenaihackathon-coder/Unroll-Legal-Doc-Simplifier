@@ -1,7 +1,7 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, Query, UploadFile
 from google import genai
 from google.genai.types import HttpOptions, GenerateContentConfig, SafetySetting, Part
-
+import fitz
 import os
 import mimetypes
 
@@ -65,21 +65,61 @@ temp_simplified_response = {}
 
 @app.post("/simplify")
 async def simplify(file: UploadFile = File(...)):
+    # Step 1: Extract text from PDF
     data = await file.read()
-    file = Part.from_bytes(data=data,mime_type='application/pdf')
+    doc = fitz.open(stream=data, filetype="pdf")
 
-    prompts = [file,"Simplify the document"]
+    extracted_text = ""
+    for page in doc:
+        extracted_text += page.get_text("text")
 
-    response = client.models.generate_content(
-        model='gemini-2.0-flash-001',
-        contents=prompts,
-        
-        config=GenerateContentConfig(
-            response_mime_type='application/json',response_json_schema=simplifiedDocJsonSchema,                           system_instruction="Simplify the given document into headings and bullet points considering the max output tokens. Stick to the information in the document. Be concise and avoid verbose. The total output tokens should be less than 500"),
+    # Step 2: Auto language simplification
+    system_instruction = (
+        "Simplify the given document into headings and bullet points. "
+        "Always produce the output in the SAME LANGUAGE as the original document. "
+        "Be concise and avoid verbose. Limit total output tokens to less than 500."
     )
 
-    print(response.parsed)
+    response = client.models.generate_content(
+        model="gemini-2.0-flash-001",
+        contents=[extracted_text],
+        config=GenerateContentConfig(
+            response_mime_type="application/json",
+            response_json_schema=simplifiedDocJsonSchema,
+            system_instruction=system_instruction,
+        ),
+    )
+
+    temp_simplified_response["response"] = response.parsed
+    # return {"simplified_doc": response.parsed}
+    return response
+
+  
+@app.post("/translate_simplified")
+def translate_simplified(target_lang: str = Query(..., enum=["hindi", "english", "tamil", "telugu", "malayalam", "kannada"])):
+    if "response" not in temp_simplified_response:
+        return {"error": "No simplified document found. Please run /simplify first."}
+
+    simplified_doc = temp_simplified_response["response"]
+
+    system_instruction = (
+        f"Translate the given JSON document into {target_lang}. "
+        f"Do not change the structure. Only translate values of title, headings, subheadings, and bullet points."
+    )
+
+    response = client.models.generate_content(
+        model="gemini-2.0-flash-001",
+        contents=[str(simplified_doc)],
+        config=GenerateContentConfig(
+            response_mime_type="application/json",
+            response_json_schema=simplifiedDocJsonSchema,
+            system_instruction=system_instruction,
+        ),
+    )
+
+    temp_simplified_response["response"] = response.parsed
+    # return {"simplified_doc_translated": response.parsed}
     return response
 
 
-    temp_simplified_response["response"] = response
+    
