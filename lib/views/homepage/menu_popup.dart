@@ -60,7 +60,7 @@ class _AccountButtonState extends State<AccountButton> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: const Color.fromRGBO(238, 109, 154, 1),
+                        color: const Color(0xFFC10547),
                         width: 2,
                       ),
                     ),
@@ -112,7 +112,11 @@ class _AccountButtonState extends State<AccountButton> {
     return CompositedTransformTarget(
       link: _layerLink,
       child: IconButton(
-        icon: Icon(Icons.account_circle_rounded, size: 50, color: Colors.pink),
+        icon: Icon(
+          Icons.account_circle_rounded,
+          size: 50,
+          color: const Color(0xFFC10547),
+        ),
         onPressed: _toggleDropdown,
       ),
     );
@@ -133,7 +137,7 @@ class _AccountButtonState extends State<AccountButton> {
                   endIndent: 50,
                   height: 1,
                   thickness: 1,
-                  color: const Color.fromRGBO(193, 5, 71, 1),
+                  color: const Color(0xFFC10547),
                 ),
               ),
             ],

@@ -1,55 +1,81 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:legal_doc_simplifier/views/camera_screen/pdf_generator.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
+class CameraButton extends StatelessWidget {
+  final Function(File) onDoneCapturing;
 
-Widget cameraButton(Function(List<File>) onDoneCapturing) {
-  return IconButton(
-    icon: Icon(Icons.camera_alt_rounded, color: ourRed, size: 80),
-    onPressed: () async {
-      final picker = ImagePicker();
-      final List<File> capturedImages = [];
-      bool capturing = true;
+  const CameraButton({super.key, required this.onDoneCapturing});
 
-      while (capturing) {
-        final pickedFile = await picker.pickImage(source: ImageSource.camera);
-        if (pickedFile != null) {
-          final imageFile = File(pickedFile.path);
-          capturedImages.add(imageFile);
-        } else {
-          capturing = false;
-          break;
+  void cameraPreviewPage(List<File> imageFiles) async {
+    final pdfFile = await generatePdfToTemp(imageFiles);
+    //   onDoneCapturing(pdfFile);
+
+    if (pdfFile.existsSync()) {
+      onDoneCapturing(pdfFile);
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (_) => PdfPreviewPage(
+      //       title: "Your PDF",
+      //       onNext: _goNext,
+      //       onBack: _goBack,
+      //     ),
+      //   ),
+      // );
+    } else {
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(content: Text('PDF generation failed')),
+      // );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.camera_alt_rounded, color: ourRed, size: 80),
+      onPressed: () async {
+        final picker = ImagePicker();
+        final List<File> capturedImages = [];
+        bool capturing = true;
+
+        while (capturing) {
+          final pickedFile = await picker.pickImage(source: ImageSource.camera);
+          if (pickedFile != null) {
+            final imageFile = File(pickedFile.path);
+            capturedImages.add(imageFile);
+          } else {
+            capturing = false;
+            break;
+          }
+
+          capturing =
+              await showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Add another image?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(ctx, false),
+                      child: const Text('No'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(ctx, true),
+                      child: const Text('Yes'),
+                    ),
+                  ],
+                ),
+              ) ??
+              false;
         }
 
-        capturing =
-            await showDialog<bool>(
-              context: navigatorKey.currentContext!,
-              builder: (ctx) => AlertDialog(
-                title: const Text('Add another image?'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(ctx, false),
-                    child: const Text('No'),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.pop(ctx, true),
-                    child: const Text('Yes'),
-                  ),
-                ],
-              ),
-            ) ??
-            false;
-      }
-
-      // ✅ Now generate PDF only after user says "No"
-      if (capturedImages.isNotEmpty) {
-        onDoneCapturing(capturedImages);
-      }
-    },
-  );
+        if (capturedImages.isNotEmpty) {
+          cameraPreviewPage(capturedImages);
+        }
+      },
+    );
+  }
 }
-
-// Add this somewhere globally (e.g., main.dart)
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

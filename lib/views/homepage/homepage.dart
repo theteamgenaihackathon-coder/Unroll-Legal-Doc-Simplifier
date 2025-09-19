@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   // late PdfControllerPinch _pdfController;
 
   List<Widget> get pages => [
-    HomeBody(onFilePicked: showPdfPreview),
+    HomeBody(onFilePicked: showPdfPreview, onDoneCapturing: showPdfPreview),
     PdfPreviewPage(title: "Your PDF", onNext: _goNext, onBack: _goBack),
     SimplifiedPage(
       onClose: () => setState(() => _currentPage = 0),
