@@ -33,7 +33,7 @@ Future<File> generatePdfToTemp(List<File> images) async {
   }
 
   final tempDir = await getTemporaryDirectory();
-  final filePath = '${tempDir.path}/scanned.pdf';
+  final filePath = '${tempDir.path}/picked.pdf';
   final pdfFile = File(filePath);
   await pdfFile.writeAsBytes(await document.save());
   return pdfFile;

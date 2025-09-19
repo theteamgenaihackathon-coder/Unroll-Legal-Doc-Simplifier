@@ -78,14 +78,8 @@ async def simplify(file: UploadFile = File(...)):
             response_mime_type='application/json',response_json_schema=simplifiedDocJsonSchema,                           system_instruction="Simplify the given document into headings and bullet points considering the max output tokens. Stick to the information in the document. Be concise and avoid verbose. The total output tokens should be less than 500"),
     )
 
+    print(response.parsed)
     return response
 
-    print(response.parsed)
 
     temp_simplified_response["response"] = response
-
-@app.get("/get_simplified")
-def get_result():
-    if "response" in temp_simplified_response:
-        return temp_simplified_response["response"]
-    return {"error": "No result available yet"}

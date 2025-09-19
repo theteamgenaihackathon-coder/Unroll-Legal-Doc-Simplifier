@@ -63,26 +63,27 @@ class LoginView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
+              const Center(
                 child: Text(
-                  'App name',
+                  'Unroll',
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 32),
-              Center(
+              const SizedBox(height: 32),
+              const Center(
                 child: Text(
                   'Create an account',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
               ),
-              SizedBox(height: 16),
-
-              Center(child: Text("Enter your email to sign up for this app")),
-              SizedBox(height: 24),
-              googleButton(context),
-              SizedBox(height: 12),
-              Row(
+              const SizedBox(height: 16),
+              const Center(
+                child: Text("Enter your email to sign up for this app"),
+              ),
+              const SizedBox(height: 24),
+              const GoogleButton(),
+              const SizedBox(height: 12),
+              const Row(
                 children: [
                   Expanded(
                     child: Divider(
@@ -103,10 +104,10 @@ class LoginView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
-              guestButton(context),
+              const SizedBox(height: 12),
+              const GuestButton(),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-              Text.rich(
+              const Text.rich(
                 textAlign: TextAlign.center,
                 TextSpan(
                   text: 'By clicking continue, you agree to our ',

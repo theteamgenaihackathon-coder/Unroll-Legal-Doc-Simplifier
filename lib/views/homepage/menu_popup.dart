@@ -90,7 +90,7 @@ class _AccountButtonState extends State<AccountButton> {
 
   Widget _buildMenuItem(IconData icon, String label, VoidCallback? action) {
     return ListTile(
-      leading: Icon(icon, color: const Color(0xFFC10547), size: 50),
+      leading: Icon(icon, color: Colors.pink, size: 50),
       title: Text(
         label,
         style: TextStyle(

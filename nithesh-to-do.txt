@@ -1,27 +1,15 @@
 Backend
 
 
-flutter - requests.dart - change url to localhost given by fastapi
-			- check if u can remove authorization - identity token and about its publicity
-			- check if u need to compress files
-			- move stuff in tezt_doc_from_json file to requests.dart file
+flutter - requests.dart - check if u can remove authorization - identity token and about its publicity
+						- check if u need to compress files
+						- move stuff in tezt_doc_from_json file to requests.dart file
 
-python - requests.py 	- create a post func for flutter to send doc
-			- create a get func for flutter to get json file
-			- authenticate in terminal - gcloud auth application-default login
-			- app name is app
-		     	- change generativeai to ones given in simplify.py
-		     	- get environment variables
-		     	- set environment variables
-		     	- how many page file can I send through http - done - not a problem
-		     	- put json schema (refer simplify.py file)
-			- set system instructions (refer simplify.py file)
-			- guess mimetype
-			- take the file in a Fileresponse format
-			- read the Fileresponse object which returns a bytestream
-			- use part to convert the bytestream to file
-			- use function to upload the file, json schema, etc. to googleapi
-			- return a response in json as given by json schema
+		- homepage.dart - upload button -> pick a file -> after picking -> 		preview page - on confirm -> simplified page(with translate) -> example page
+					- on back -> homepage
+
+					- camera button -> camera click image -> pop up to add -> connect to preview page
+
 
 Docker 			- check and replace the first line of docker json response
 			- find whether 2nd line - work dir should me loc of python file or loc of project root
@@ -38,8 +26,7 @@ Note: Check how to run uvicorn python file from cloud run
 			
 
 
-17th Sept:
 
-In upload page try to use a future builder to get a 
 
-make camera_screen.dart more modular
+
+
