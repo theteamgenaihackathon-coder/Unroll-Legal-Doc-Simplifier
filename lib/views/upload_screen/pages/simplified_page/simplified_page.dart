@@ -25,6 +25,7 @@ class SimplifiedPage extends StatefulWidget {
 
 class _SimplifiedPageState extends State<SimplifiedPage> {
   double docHeightFactor = 0.6;
+  Map<String, dynamic>? _docJson; //holds translated doc
 
   void shrinkDocView() {
     setState(() {
@@ -33,12 +34,19 @@ class _SimplifiedPageState extends State<SimplifiedPage> {
     widget.onToggleChat(); // still triggers overlay shrink
   }
 
+  void updateDoc(Map<String, dynamic> newDoc) {
+    setState(() {
+      _docJson = newDoc;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: getTemporaryDirectory(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
+          print('hellooooo');
           return const Center(child: CircularProgressIndicator());
         }
         final filePath = '${snapshot.data!.path}/picked.pdf';
@@ -67,7 +75,7 @@ class _SimplifiedPageState extends State<SimplifiedPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          chooseLanguageButton(),
+                          ChooseLanguageButton(onTranslationSuccess: updateDoc),
                           exampleButton(shrinkDocView),
                         ],
                       ),
@@ -80,7 +88,10 @@ class _SimplifiedPageState extends State<SimplifiedPage> {
                   child: SizedBox(
                     height:
                         MediaQuery.of(context).size.height * docHeightFactor,
-                    child: SimplifiedDocView(pdfFile: File(filePath)),
+                    child: SimplifiedDocView(
+                      pdfFile: File(filePath),
+                      overrideDocJson: _docJson, //inject translated JSON
+                    ),
                   ),
                 ),
               ],
