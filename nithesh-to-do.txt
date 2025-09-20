@@ -30,3 +30,16 @@ Note: Check how to run uvicorn python file from cloud run
 
 
 
+sept 19th 2025
+
+
+things we need to make as method chaining
+
+1. Column
+2. Row
+3. Text
+4. Elevated Button
+5. 
+
+
+Divider ....

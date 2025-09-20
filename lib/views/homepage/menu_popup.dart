@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:legal_doc_simplifier/views/homepage/on_logout.dart';
 
 class AccountButton extends StatefulWidget {
-  final VoidCallback? onLogout;
-  final VoidCallback? onProfile;
-  const AccountButton({super.key, this.onProfile, this.onLogout});
+  // final VoidCallback? onLogout;
+  const AccountButton({super.key});
 
   @override
   State<AccountButton> createState() => _AccountButtonState();
@@ -70,12 +70,12 @@ class _AccountButtonState extends State<AccountButton> {
                         _buildMenuItem(
                           Icons.account_circle_rounded,
                           'Profile',
-                          widget.onProfile,
+                          null,
                         ),
                         _buildMenuItem(Icons.history, 'History', null),
                         _buildMenuItem(Icons.bookmark, 'Saved', null),
                         _buildMenuItem(Icons.settings, 'Settings', null),
-                        _buildMenuItem(Icons.logout, 'Logout', widget.onLogout),
+                        _buildMenuItem(Icons.logout, 'Logout', googleLogOut),
                       ]),
                     ),
                   ),
@@ -88,7 +88,7 @@ class _AccountButtonState extends State<AccountButton> {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String label, VoidCallback? action) {
+  Widget _buildMenuItem(IconData icon, String label, Function? action) {
     return ListTile(
       leading: Icon(icon, color: Colors.pink, size: 50),
       title: Text(

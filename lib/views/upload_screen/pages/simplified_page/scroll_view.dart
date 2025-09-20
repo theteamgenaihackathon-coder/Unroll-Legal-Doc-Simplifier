@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:legal_doc_simplifier/network/gemini_requests.dart';
 import 'content_styling.dart';
 
 class SimplifiedDocView extends StatefulWidget {
@@ -39,13 +40,14 @@ class _SimplifiedDocViewState extends State<SimplifiedDocView> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final decoded = jsonDecode(snapshot.data ?? '{}');
-            final simplifiedText = decoded["candidates"]?[0]?["content"]?["parts"]?[0]?["text"];
+            final simplifiedText =
+                decoded["candidates"]?[0]?["content"]?["parts"]?[0]?["text"];
             if (simplifiedText != null) {
               _docJson = jsonDecode(simplifiedText);
             }
           }
         }
-          
+
         final title = _docJson?['title'] ?? 'Untitled';
         final sections = _docJson?['sections'] as List<dynamic>? ?? [];
 
@@ -69,7 +71,6 @@ class _SimplifiedDocViewState extends State<SimplifiedDocView> {
         );
       },
     );
-  
 
     //     final String simplifiedJsonString = """{
     //   "title": "TERMS AND CONDITIONS",

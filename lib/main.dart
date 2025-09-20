@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:legal_doc_simplifier/views/homepage/homepage.dart';
 import 'package:legal_doc_simplifier/views/loginpage/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +13,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAuth.instance.signOut();
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
