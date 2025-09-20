@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:legal_doc_simplifier/views/upload_screen/doubt_button.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/example_button.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/language_button.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/simplified_page/scroll_view.dart';
@@ -61,6 +62,7 @@ class _SimplifiedPageState extends ConsumerState<SimplifiedPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          doubtButton(ref),
                           exampleButton(ref),
                           ChooseLanguageButton(onTranslationSuccess: updateDoc),
                         ],
