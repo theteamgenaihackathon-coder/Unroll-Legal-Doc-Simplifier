@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
 import 'package:legal_doc_simplifier/views/homepage/upload_button.dart';
+import 'package:legal_doc_simplifier/views/upload_screen/show_pdf_overlay.dart';
+import 'package:legal_doc_simplifier/views/camera_screen/pdf_generator.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
@@ -38,15 +42,15 @@ class HomeBody extends StatelessWidget {
           children: [
             uploadButton(context),
             SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-            cameraButton(() async {
-              final pickedFile = await ImagePicker().pickImage(
-                source: ImageSource.camera,
-              );
-              if (pickedFile != null) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text("Image captured!")));
-                // You can also store or navigate with the image here
+            cameraButton((List<File> imageFiles) async {
+              final pdfFile = await generatePdfToTemp(imageFiles);
+
+              if (pdfFile.existsSync()) {
+                showPdfOverlay(context, title: 'Confirm PDF', pdfFile: pdfFile);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('PDF generation failed')),
+                );
               }
             }),
           ],

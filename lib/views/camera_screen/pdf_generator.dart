@@ -1,21 +1,40 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'dart:ui';
 
-Future<File> generatePdfToTempWithTimestamp(List<File> images) async {
-  final pdf = pw.Document();
+Future<File> generatePdfToTemp(List<File> images) async {
+  final document = PdfDocument();
 
   for (final img in images) {
     final bytes = await img.readAsBytes();
-    final pwImage = pw.MemoryImage(bytes);
-    pdf.addPage(pw.Page(build: (_) => pw.Center(child: pw.Image(pwImage))));
+    if (bytes.isEmpty) continue;
+
+    final page = document.pages.add();
+    final image = PdfBitmap(bytes);
+
+    page.graphics.drawImage(
+      image,
+      Rect.fromLTWH(
+        0,
+        0,
+        page.getClientSize().width,
+        page.getClientSize().height,
+      ),
+    );
+  }
+
+  if (document.pages.count == 0) {
+    document.pages.add().graphics.drawString(
+      'No valid images found',
+      PdfStandardFont(PdfFontFamily.helvetica, 18),
+      bounds: const Rect.fromLTWH(0, 0, 500, 50),
+    );
   }
 
   final tempDir = await getTemporaryDirectory();
-  final timestamp = DateTime.now().millisecondsSinceEpoch;
-  final filePath = '${tempDir.path}/scan_$timestamp.pdf';
-
+  final filePath = '${tempDir.path}/scanned.pdf';
   final pdfFile = File(filePath);
-  await pdfFile.writeAsBytes(await pdf.save());
+  await pdfFile.writeAsBytes(await document.save());
   return pdfFile;
 }
