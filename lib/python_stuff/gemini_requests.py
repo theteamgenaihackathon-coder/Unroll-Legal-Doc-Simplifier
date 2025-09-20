@@ -72,7 +72,7 @@ blankFillJsonSchema ={
           "properties": {
             "example": {
               "type": "string",
-              "description": "An relevant,realistic and useful example value for the missing field. Eg: John, 169, Manhattan,etc."
+              "description": "An relevant,realistic and useful example value for the missing field. Eg: Rakesh, 169, chandnichouk, etc."
             },
             "field": {
                 "type": "string",
@@ -120,7 +120,7 @@ async def simplify(file: UploadFile = File(...)):
         "Simplify the given document into headings and bullet points. "
         "Always produce the output in the SAME LANGUAGE as the original document. "
         "If the given document contains images, perform optical character recognition"
-        "Be concise and avoid verbose. Limit total output tokens to less than 500."
+        "Be concise. Limit total output tokens to less than 500. Explain in simple vocabulary"
     )
 
     response = client.models.generate_content(
@@ -189,7 +189,9 @@ async def fill():
             response_mime_type="application/json",
             response_json_schema=blankFillJsonSchema,
             system_instruction=system_instruction,
-            temperature=1
+            temperature=1,
+            # top_k=30
+            # top_p=0.3
         ),
     )
     print(response)
