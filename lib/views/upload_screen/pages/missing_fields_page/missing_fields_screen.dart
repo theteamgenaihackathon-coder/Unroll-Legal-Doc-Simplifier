@@ -74,7 +74,7 @@ class MissingFieldsScreen extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "$index) ${field.example} [${field.field}]",
+                                    "${index + 1}) ${field.example} [${field.field}]",
                                     style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,

@@ -72,7 +72,7 @@ blankFillJsonSchema ={
           "properties": {
             "example": {
               "type": "string",
-              "description": "An example value for the missing field"
+              "description": "An relevant,realistic and useful example value for the missing field. Eg: John, 169, Manhattan,etc."
             },
             "field": {
                 "type": "string",
@@ -107,28 +107,29 @@ temp_docs = []
 async def simplify(file: UploadFile = File(...)):
     # Step 1: Extract text from PDF
     data = await file.read()
-    doc = fitz.open(stream=data, filetype="pdf")
+    # doc = fitz.open(stream=data, filetype="pdf")
+    doc = Part.from_bytes(data=data,mime_type="application/pdf")
     temp_docs.append(doc)
 
-    extracted_text = ""
-    for page in doc:
-        extracted_text += page.get_text("text")
+    # extracted_text = ""
+    # for page in doc:
+    #     extracted_text += page.get_text("text")
 
     # Step 2: Auto language simplification
     system_instruction = (
         "Simplify the given document into headings and bullet points. "
         "Always produce the output in the SAME LANGUAGE as the original document. "
+        "If the given document contains images, perform optical character recognition"
         "Be concise and avoid verbose. Limit total output tokens to less than 500."
     )
 
     response = client.models.generate_content(
         model="gemini-2.0-flash-001",
-        contents=[extracted_text],
+        contents=[doc],
         config=GenerateContentConfig(
             response_mime_type="application/json",
             response_json_schema=simplifiedDocJsonSchema,
             system_instruction=system_instruction,
-            max_output_tokens=600
         ),
     )
 
@@ -156,7 +157,6 @@ def translate_simplified(target_lang: str = Query(..., enum=["hindi", "english",
             response_mime_type="application/json",
             response_json_schema=simplifiedDocJsonSchema,
             system_instruction=system_instruction,
-            max_output_tokens=600,
         ),
     )
 
@@ -172,25 +172,24 @@ async def fill():
     # doc = fitz.open(stream=data, filetype="pdf")
     doc = temp_docs[-1]
 
-    extracted_text = ""
-    for page in doc:
-        extracted_text += page.get_text("text")
+    # extracted_text = ""
+    # for page in doc:
+    #     extracted_text += page.get_text("text")
 
     # Step 2: Auto language simplification
     system_instruction = ("""
-        You are an assistant that analyzes input files and identifies missing fields. Find fill in the blanks in the given file and return example,field, location of the blank with respect to the structure of document for a general user and reason why the given example is suitable in the blank with respect to the document flow
+        You are an assistant that analyzes input files and identifies missing fields. Find fill in the blanks in the given file and return relevant, realistic and useful example,field, location of the blank with respect to the structure of document for a general user and reason why the given example is suitable in the blank with respect to the document flow.
 """
     )
 
     response = client.models.generate_content(
         model="gemini-2.0-flash-001",
-        contents=[extracted_text],
+        contents=[doc],
         config=GenerateContentConfig(
             response_mime_type="application/json",
             response_json_schema=blankFillJsonSchema,
             system_instruction=system_instruction,
-            temperature=0.3,
-            max_output_tokens=600
+            temperature=1
         ),
     )
     print(response)
