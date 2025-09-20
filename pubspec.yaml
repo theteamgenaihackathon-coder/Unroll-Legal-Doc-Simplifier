@@ -5,57 +5,58 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+    sdk: ^3.9.2
 
 dependencies:
-  flutter:
-    sdk: flutter
+    flutter:
+        sdk: flutter
+    flutter_riverpod: ^2.4.0
 
-  flutter_svg: ^2.2.1
-  cupertino_icons: ^1.0.8
-  firebase_core: ^3.6.0
-  firebase_auth: ^5.2.0
-  cloud_firestore: ^5.5.0
-  firebase_storage: ^12.3.0
-  google_sign_in: ^6.2.1
-  path_provider: ^2.1.1
-  pdfx: ^2.3.0
-  image_picker: ^1.1.2
-  pdf: ^3.10.8
-  file_picker: ^8.1.2   # ✅ use stable version from pub.dev
-  http: ^1.5.0
-  syncfusion_flutter_pdf: ^24.1.41
+    flutter_svg: ^2.2.1
+    cupertino_icons: ^1.0.8
+    firebase_core: ^3.6.0
+    firebase_auth: ^5.2.0
+    cloud_firestore: ^5.5.0
+    firebase_storage: ^12.3.0
+    google_sign_in: ^6.2.1
+    path_provider: ^2.1.1
+    pdfx: ^2.3.0
+    image_picker: ^1.1.2
+    pdf: ^3.10.8
+    file_picker: ^8.1.2 # ✅ use stable version from pub.dev
+    http: ^1.5.0
+    syncfusion_flutter_pdf: ^24.1.41
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.5
-  flutter_lints: ^6.0.0
+    flutter_test:
+        sdk: flutter
+    flutter_launcher_icons: ^0.13.1
+    flutter_native_splash: ^2.3.5
+    flutter_lints: ^6.0.0
 
 flutter:
-  uses-material-design: true
-  assets:
-    - assets/images/bgimage2.svg
-    - assets/icons/google_logo.png
-    - assets/icons/doubt.png
-    - assets/icons/language_icon.png
+    uses-material-design: true
+    assets:
+        - assets/images/bgimage2.svg
+        - assets/icons/google_logo.png
+        - assets/icons/doubt.png
+        - assets/icons/language_icon.png
 
-  fonts:
-    - family: ArchitectsDaughter
-      fonts:
-        - asset: assets/fonts/Architects_Daughter/ArchitectsDaughter-Regular.ttf
-    - family: ComingSoon
-      fonts:
-        - asset: assets/fonts/Coming_Soon/ComingSoon-Regular.ttf
+    fonts:
+        - family: ArchitectsDaughter
+          fonts:
+              - asset: assets/fonts/Architects_Daughter/ArchitectsDaughter-Regular.ttf
+        - family: ComingSoon
+          fonts:
+              - asset: assets/fonts/Coming_Soon/ComingSoon-Regular.ttf
 
 flutter_launcher_icons:
-  android: true
-  ios: false
-  image_path: "assets/images/Unroll_logo.jpg"
+    android: true
+    ios: false
+    image_path: "assets/images/Unroll_logo.jpg"
 
 flutter_native_splash:
-  color: "#ffffff"
-  image: assets/images/Unroll_logo.jpg
-  android: true
-  ios: false
+    color: "#ffffff"
+    image: assets/images/Unroll_logo.jpg
+    android: true
+    ios: false

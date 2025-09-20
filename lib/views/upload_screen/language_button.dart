@@ -21,7 +21,7 @@ class _ChooseLanguageButtonState extends State<ChooseLanguageButton> {
     "tamil",
     "telugu",
     "malayalam",
-    "kannada"
+    "kannada",
   ];
 
   Future<void> _translate(String lang) async {
@@ -31,8 +31,8 @@ class _ChooseLanguageButtonState extends State<ChooseLanguageButton> {
       final responseString = await translateSimplifiedRequest(lang);
 
       final Map<String, dynamic> decoded = jsonDecode(responseString);
-      final simplifiedDoc = decoded["candidates"]?[0]?["content"]?["parts"]?[0]
-          ?["text"]; // adjust depending on backend
+      final simplifiedDoc =
+          decoded["candidates"]?[0]?["content"]?["parts"]?[0]?["text"]; // adjust depending on backend
 
       if (simplifiedDoc != null) {
         final Map<String, dynamic> jsonDoc = jsonDecode(simplifiedDoc);
@@ -57,7 +57,10 @@ class _ChooseLanguageButtonState extends State<ChooseLanguageButton> {
               width: 24,
               child: CircularProgressIndicator(strokeWidth: 2),
             )
-          : const Icon(Icons.g_translate, color: Color.fromARGB(255, 255, 117, 129)),
+          : const Icon(
+              Icons.g_translate,
+              color: Color.fromARGB(255, 255, 117, 129),
+            ),
       onSelected: (String lang) {
         setState(() => _selectedLang = lang);
         _translate(lang);

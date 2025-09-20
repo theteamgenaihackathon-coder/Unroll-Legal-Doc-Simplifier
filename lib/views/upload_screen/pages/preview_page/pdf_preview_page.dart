@@ -1,35 +1,27 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:legal_doc_simplifier/views/homepage/home_providers.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdfx/pdfx.dart';
-import 'package:legal_doc_simplifier/views/upload_screen/overlays/divider.dart';
+import 'package:legal_doc_simplifier/views/upload_screen/divider.dart';
 
-class PdfPreviewPage extends StatelessWidget {
+class PdfPreviewPage extends ConsumerWidget {
   final String title;
-  final VoidCallback onNext;
-  final VoidCallback onBack;
-  // final PdfControllerPinch controller;
 
-  const PdfPreviewPage({
-    super.key,
-    required this.title,
-    required this.onNext,
-    required this.onBack,
-    // required this.controller,
-  });
+  const PdfPreviewPage({super.key, required this.title});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return FutureBuilder(
       future: getTemporaryDirectory(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
+
         final filePath = '${snapshot.data!.path}/picked.pdf';
-        PdfControllerPinch controller = PdfControllerPinch(
-          document: PdfDocument.openFile((filePath)),
+        final controller = PdfControllerPinch(
+          document: PdfDocument.openFile(filePath),
         );
 
         return Column(
@@ -56,7 +48,9 @@ class PdfPreviewPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton.icon(
-                  onPressed: onBack,
+                  onPressed: () {
+                    ref.read(currentPageProvider.notifier).state = 0;
+                  },
                   icon: const Icon(Icons.arrow_back, color: Colors.pink),
                   label: const Text('Back'),
                   style: ElevatedButton.styleFrom(
@@ -69,7 +63,9 @@ class PdfPreviewPage extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: onNext,
+                  onPressed: () {
+                    ref.read(currentPageProvider.notifier).state = 2;
+                  },
                   icon: const Icon(Icons.arrow_forward, color: Colors.pink),
                   label: const Text('Continue'),
                   style: ElevatedButton.styleFrom(

@@ -5,13 +5,14 @@ class GuestButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+      backgroundColor: Colors.grey.shade100,
+      foregroundColor: Colors.black,
+      minimumSize: const Size(double.infinity, 48),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    );
     return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.grey.shade100,
-        foregroundColor: Colors.black,
-        minimumSize: const Size(double.infinity, 48),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
+      style: buttonStyle,
       icon: const Icon(Icons.person_outline),
       label: const Text('Continue as guest'),
       onPressed: () {

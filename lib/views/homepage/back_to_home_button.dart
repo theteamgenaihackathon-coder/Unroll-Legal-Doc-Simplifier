@@ -4,12 +4,11 @@ import 'package:legal_doc_simplifier/views/homepage/home_providers.dart';
 
 const Color ourRed = Color(0xFFC10547);
 
-IconButton exampleButton(WidgetRef ref) {
+IconButton backToHomeButton(WidgetRef ref) {
   return IconButton(
     onPressed: () {
-      ref.read(currentPageProvider.notifier).state = 3;
+      ref.read(currentPageProvider.notifier).state = 0;
     },
-    icon: const Icon(Icons.question_answer_rounded),
-    color: const Color.fromARGB(255, 255, 117, 129),
+    icon: Icon(Icons.arrow_back_ios_new_rounded, color: ourRed, size: 30),
   );
 }

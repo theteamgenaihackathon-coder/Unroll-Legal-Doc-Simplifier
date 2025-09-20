@@ -1,3 +1,5 @@
+// Makes Json into a Structers to make a Viewable Styled Text
+
 import 'package:flutter/material.dart';
 
 class SectionWidget extends StatelessWidget {

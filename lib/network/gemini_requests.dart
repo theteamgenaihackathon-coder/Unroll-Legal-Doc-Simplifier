@@ -14,10 +14,6 @@ Future<String> simplifyDocRequest(File file) async {
   final request = http.MultipartRequest('POST', url)
     ..files.add(await http.MultipartFile.fromPath('file', file.path));
   final streamedResponse = await request.send();
-  // final stream = streamedResponse.stream.transform(const Utf8Decoder());
-  // await for (final chunk in stream) {
-  //   yield chunk; // Emit each chunk as it arrives
-  // }
 
   final responseBody = await streamedResponse.stream.bytesToString();
 
@@ -30,7 +26,8 @@ Future<String> simplifyDocRequest(File file) async {
 /// ✅ New: Request to translate the simplified document
 Future<String> translateSimplifiedRequest(String targetLang) async {
   final url = Uri.parse(
-      'http://10.0.2.2:8000/translate_simplified?target_lang=$targetLang');
+    'http://10.0.2.2:8000/translate_simplified?target_lang=$targetLang',
+  );
 
   final response = await http.post(url);
 
@@ -39,5 +36,18 @@ Future<String> translateSimplifiedRequest(String targetLang) async {
     return response.body;
   } else {
     throw Exception("Translation failed: ${response.body}");
+  }
+}
+
+Future<String> fillRequest() async {
+  final url = Uri.parse('http://10.0.2.2:8000/fill');
+
+  final response = await http.post(url);
+
+  if (response.statusCode == 200) {
+    print("\n[Fill Response]\n${response.body}\n");
+    return response.body;
+  } else {
+    throw Exception("Document Filling failed: ${response.body}");
   }
 }
