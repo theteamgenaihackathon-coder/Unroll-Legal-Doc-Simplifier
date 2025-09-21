@@ -1,9 +1,12 @@
 from fastapi import FastAPI, File, Query, UploadFile
 from google import genai
 from google.genai.types import HttpOptions, GenerateContentConfig, SafetySetting, Part
+from pydantic import BaseModel
 import fitz
 import os
 import mimetypes
+from fastapi.responses import JSONResponse
+
 
 app = FastAPI()
 
@@ -199,3 +202,36 @@ async def fill():
     temp_simplified_response["response"] = response.parsed
     # return {"simplified_doc": response.parsed}
     return response
+
+class DoubtRequest(BaseModel):
+    doubt: str
+
+@app.post("/doubt")
+async def handle_doubt(request: DoubtRequest):
+    doc=temp_docs[-1]
+    system_instruction = (
+         "You are an assistant that answers user questions (doubts) clearly and helpfully with respect to the document given, say question not relevant if the question is not related to the document."
+        "Provide a concise, useful response that addresses the user’s doubt.")
+
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.0-flash-001",
+            contents=[doc,request.doubt],
+            config=GenerateContentConfig(
+                response_mime_type="application/json",
+                system_instruction=system_instruction,
+                response_schema=DoubtRequest,
+                temperature=0.7,
+                max_output_tokens=500
+            ),
+        )
+        return {"answer": response.parsed}
+    except Exception as e:
+        print("Error in /doubt:", e)
+        return JSONResponse(
+            status_code=500,
+            content={"error": str(e)}  # <-- Always JSON
+        )
+
+    # You can return raw or parsed depending on your needs
+    # return {"answer": response.parsed}

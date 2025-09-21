@@ -2,6 +2,8 @@
 
 // import 'dart:convert';
 
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
@@ -49,5 +51,22 @@ Future<String> fillRequest() async {
     return response.body;
   } else {
     throw Exception("Document Filling failed: ${response.body}");
+  }
+}
+
+Future<String> sendDoubtRequest(String doubt) async {
+  final url = Uri.parse('http://10.0.2.2:8000/doubt');
+
+  final response = await http.post(
+    url,
+    headers: {"Content-Type": "application/json"},
+    body: jsonEncode({"doubt": doubt}),
+  );
+
+  if (response.statusCode == 200) {
+    print("\n[Doubt Response]\n${response.body}\n");
+    return response.body;
+  } else {
+    throw Exception("Doubt request failed: ${response.body}");
   }
 }
