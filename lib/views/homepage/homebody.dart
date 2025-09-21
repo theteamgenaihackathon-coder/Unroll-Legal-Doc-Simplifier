@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 // import 'dart:io';
 import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
 import 'package:legal_doc_simplifier/views/homepage/upload_button.dart';
@@ -15,12 +14,6 @@ class HomeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SvgPicture bgImage = SvgPicture.asset(
-      'assets/images/bgimage2.svg',
-      height: MediaQuery.of(context).size.height * 0.36,
-      // width: MediaQuery.of(context).size.width * 0.01,
-    );
-
     const Text getStarted = Text(
       "GET STARTED WITH A DOCUMENT NOW !!!",
       style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
@@ -33,22 +26,26 @@ class HomeBody extends ConsumerWidget {
     );
 
     return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.width * 0.2,
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/HomePageBG.png',
+              fit: BoxFit.cover,
             ),
-            child: bgImage,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.05,
-            ),
-            child: getStarted,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                ),
+                child: getStarted,
+              ),
+              buttonRow,
+            ],
           ),
-          buttonRow,
         ],
       ),
     );

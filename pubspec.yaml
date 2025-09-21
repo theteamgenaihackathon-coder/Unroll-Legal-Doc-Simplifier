@@ -28,6 +28,7 @@ dependencies:
     syncfusion_flutter_pdf: ^24.1.41
     flutter_hooks: ^0.21.3+1
     hooks_riverpod: ^2.6.1
+    google_fonts: ^6.3.1
 
 dev_dependencies:
     flutter_test:
@@ -40,6 +41,9 @@ flutter:
     uses-material-design: true
     assets:
         - assets/images/bgimage2.svg
+        - assets/images/HomePageBG.png
+        - assets/images/girl_image.svg
+        - assets/images/rectangle.svg
         - assets/icons/google_logo.png
         - assets/icons/doubt.png
         - assets/icons/language_icon.png
