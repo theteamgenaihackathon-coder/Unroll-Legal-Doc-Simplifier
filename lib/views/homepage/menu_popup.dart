@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:legal_doc_simplifier/views/homepage/on_logout.dart';
 
-class AccountButton extends StatefulWidget {
+class AccountButton extends ConsumerStatefulWidget {
   // final VoidCallback? onLogout;
   const AccountButton({super.key});
 
   @override
-  State<AccountButton> createState() => _AccountButtonState();
+  ConsumerState<AccountButton> createState() => _AccountButtonState();
 }
 
-class _AccountButtonState extends State<AccountButton> {
+class _AccountButtonState extends ConsumerState<AccountButton> {
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
 
@@ -101,7 +102,9 @@ class _AccountButtonState extends State<AccountButton> {
       ),
 
       onTap: () {
-        action?.call();
+        if (action != null) {
+          action(context);
+        }
         _toggleDropdown();
       },
     );

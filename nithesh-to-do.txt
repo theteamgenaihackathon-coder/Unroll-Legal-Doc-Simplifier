@@ -3,7 +3,6 @@ Backend
 
 flutter - requests.dart - check if u can remove authorization - identity token and about its publicity
 						- check if u need to compress files
-						- move stuff in tezt_doc_from_json file to requests.dart file
 
 		- homepage.dart - upload button -> pick a file -> after picking -> 		preview page - on confirm -> simplified page(with translate) -> example page
 					- on back -> homepage

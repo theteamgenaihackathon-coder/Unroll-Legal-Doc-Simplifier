@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:legal_doc_simplifier/views/homepage/home_providers.dart';
 import 'package:legal_doc_simplifier/views/homepage/homebody.dart';
 import 'package:legal_doc_simplifier/views/homepage/menu_popup.dart';
@@ -28,15 +29,20 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
-        backgroundColor: Colors.white,
+        toolbarHeight: MediaQuery.of(context).size.width * 0.2,
+        backgroundColor: const Color.fromARGB(255, 239, 144, 154), // light
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         surfaceTintColor: Colors.transparent,
         elevation: 2,
         shadowColor: Colors.black.withAlpha(200),
-        title: const Text("Unroll"),
-        centerTitle: true,
-        actions: [AccountButton()],
+        title: Text(
+          'UNROLL',
+          style: GoogleFonts.poppins(
+            fontSize: 40,
+            fontWeight: FontWeight.w600,
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
+        ),
       ),
       body: pages[ref.watch(currentPageProvider)],
       backgroundColor: Colors.white,

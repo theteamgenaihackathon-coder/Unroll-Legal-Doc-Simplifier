@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 // import 'dart:io';
 import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
 import 'package:legal_doc_simplifier/views/homepage/upload_button.dart';
@@ -15,42 +14,40 @@ class HomeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SvgPicture bgImage = SvgPicture.asset(
-      'assets/images/bgimage2.svg',
-      height: MediaQuery.of(context).size.height * 0.4,
-    );
-
     const Text getStarted = Text(
       "GET STARTED WITH A DOCUMENT NOW !!!",
       style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
+      textAlign: TextAlign.center,
     );
 
     Row buttonRow = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        UploadButton(),
-        SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-        CameraButton(),
-      ],
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [UploadButton(), CameraButton()],
     );
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 24,
-            right: 24,
-            top: 120,
-            bottom: 40,
+    return SafeArea(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/HomePageBG.png',
+              fit: BoxFit.cover,
+            ),
           ),
-          child: bgImage,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: getStarted,
-        ),
-        buttonRow,
-      ],
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                ),
+                child: getStarted,
+              ),
+              buttonRow,
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

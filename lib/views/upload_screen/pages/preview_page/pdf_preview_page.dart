@@ -26,26 +26,28 @@ class PdfPreviewPage extends ConsumerWidget {
 
         return Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.08),
             Text(
               title,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             divider(),
-            const SizedBox(height: 70),
+            // const SizedBox(height: 70),
             SizedBox(
-              height: 400,
+              height: MediaQuery.of(context).size.height * 0.6,
               width: double.infinity,
               child: PdfViewPinch(
+                backgroundDecoration: BoxDecoration(),
                 controller: controller,
                 scrollDirection: Axis.vertical,
               ),
             ),
-            const SizedBox(height: 70),
+            // const SizedBox(height: 70),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton.icon(
                   onPressed: () {

@@ -11,7 +11,7 @@ dependencies:
     flutter:
         sdk: flutter
     flutter_riverpod: ^2.4.0
-
+    permission_handler: ^11.3.0
     flutter_svg: ^2.2.1
     cupertino_icons: ^1.0.8
     firebase_core: ^3.6.0
@@ -28,6 +28,7 @@ dependencies:
     syncfusion_flutter_pdf: ^24.1.41
     flutter_hooks: ^0.21.3+1
     hooks_riverpod: ^2.6.1
+    google_fonts: ^6.3.1
 
 dev_dependencies:
     flutter_test:
@@ -40,6 +41,9 @@ flutter:
     uses-material-design: true
     assets:
         - assets/images/bgimage2.svg
+        - assets/images/HomePageBG.png
+        - assets/images/girl_image.svg
+        - assets/images/rectangle.svg
         - assets/icons/google_logo.png
         - assets/icons/doubt.png
         - assets/icons/language_icon.png
