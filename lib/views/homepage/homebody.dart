@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'dart:io';
 import 'package:legal_doc_simplifier/views/homepage/camera_button.dart';
 import 'package:legal_doc_simplifier/views/homepage/upload_button.dart';
@@ -14,10 +15,26 @@ class HomeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Text getStarted = Text(
-      "GET STARTED WITH A DOCUMENT NOW !!!",
-      style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
-      textAlign: TextAlign.center,
+    final getStarted = Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          "Get Started With a",
+          style: GoogleFonts.poppins(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
+        ),
+        Text(
+          "Document Now !!!",
+          style: GoogleFonts.poppins(
+            fontSize: 22, // Match the top line
+            fontWeight: FontWeight.w600,
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
+        ),
+      ],
     );
 
     Row buttonRow = Row(
@@ -38,11 +55,14 @@ class HomeBody extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                padding: EdgeInsets.only(
+                  bottom: 25, // Moves text up from the bottom
+                  left: MediaQuery.of(context).size.width * 0.05,
+                  right: MediaQuery.of(context).size.width * 0.05,
                 ),
                 child: getStarted,
               ),
+
               buttonRow,
             ],
           ),

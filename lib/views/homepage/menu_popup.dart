@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:legal_doc_simplifier/views/homepage/on_logout.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+// final user = FirebaseAuth.instance.currentUser;
+// final profileLabel =
+//     "${user?.displayName ?? 'User'}\n${user?.email ?? 'No Email'}";
 
 class AccountButton extends ConsumerStatefulWidget {
   // final VoidCallback? onLogout;
@@ -67,17 +72,24 @@ class _AccountButtonState extends ConsumerState<AccountButton> {
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: _buildMenuItemsWithDividers([
-                        _buildMenuItem(
-                          Icons.account_circle_rounded,
-                          'Profile',
-                          null,
+                      children: [
+                        StreamBuilder<User?>(
+                          stream: FirebaseAuth.instance.authStateChanges(),
+                          builder: (context, snapshot) {
+                            final user = snapshot.data;
+                            final profileLabel =
+                                "${user?.displayName ?? 'Guest'}\n${user?.email ?? ''}";
+
+                            return _buildMenuItem(
+                              Icons.account_circle_rounded,
+                              profileLabel,
+                              null,
+                            );
+                          },
                         ),
-                        _buildMenuItem(Icons.history, 'History', null),
-                        _buildMenuItem(Icons.bookmark, 'Saved', null),
                         _buildMenuItem(Icons.settings, 'Settings', null),
                         _buildMenuItem(Icons.logout, 'Logout', googleLogOut),
-                      ]),
+                      ],
                     ),
                   ),
                 ),
@@ -91,7 +103,7 @@ class _AccountButtonState extends ConsumerState<AccountButton> {
 
   Widget _buildMenuItem(IconData icon, String label, Function? action) {
     return ListTile(
-      leading: Icon(icon, color: Colors.pink, size: 50),
+      leading: Icon(icon, color: const Color(0xFFC10547), size: 50),
       title: Text(
         label,
         style: TextStyle(
@@ -118,7 +130,7 @@ class _AccountButtonState extends ConsumerState<AccountButton> {
         icon: Icon(
           Icons.account_circle_rounded,
           size: 50,
-          color: const Color(0xFFC10547),
+          color: const Color.fromARGB(255, 255, 255, 255),
         ),
         onPressed: _toggleDropdown,
       ),
