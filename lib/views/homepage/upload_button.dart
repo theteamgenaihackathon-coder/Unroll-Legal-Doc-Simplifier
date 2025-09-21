@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:legal_doc_simplifier/main.dart';
 import 'package:legal_doc_simplifier/views/homepage/handle_upload.dart';
-import 'package:legal_doc_simplifier/views/homepage/permission_handler.dart';
 
 class UploadButton extends ConsumerWidget {
   const UploadButton({super.key});

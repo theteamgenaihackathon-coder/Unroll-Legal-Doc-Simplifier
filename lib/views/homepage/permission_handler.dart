@@ -7,8 +7,8 @@ Future<bool> requestAppropriateStoragePermission() async {
 
   // Fallback for Android 13+
   final photos = await Permission.photos.request();
-  // final videos = await Permission.videos.request();
-  // final audio = await Permission.audio.request();
+  final videos = await Permission.videos.request();
+  final audio = await Permission.audio.request();
 
-  return photos.isGranted;
+  return photos.isGranted || videos.isGranted || audio.isGranted;
 }

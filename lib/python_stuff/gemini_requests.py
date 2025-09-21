@@ -6,16 +6,20 @@ import fitz
 import os
 import mimetypes
 from fastapi.responses import JSONResponse
+from google.auth import default
+from google.cloud import storage
 
+credentials, project = default()
+client = storage.Client(credentials=credentials)
 
 app = FastAPI()
 
 PROJECT_NAME = "unroll-genai-hackathon-app"
 PROJECT_REGION = "global"
 
-os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "true"
-os.environ["GOOGLE_CLOUD_PROJECT"] = PROJECT_NAME
-os.environ["GOOGLE_CLOUD_LOCATION"] = PROJECT_REGION
+# os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "true"
+# os.environ["GOOGLE_CLOUD_PROJECT"] = PROJECT_NAME
+# os.environ["GOOGLE_CLOUD_LOCATION"] = PROJECT_REGION
 
 simplifiedDocJsonSchema = {
   "type": "object",
