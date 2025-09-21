@@ -8,6 +8,7 @@ import 'package:legal_doc_simplifier/views/upload_screen/pages/final_page/final_
 import 'package:legal_doc_simplifier/views/upload_screen/pages/missing_fields_page/missing_fields_screen.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/preview_page/pdf_preview_page.dart';
 import 'package:legal_doc_simplifier/views/upload_screen/pages/simplified_page/simplified_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -29,12 +30,22 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: MediaQuery.of(context).size.width * 0.2,
+        toolbarHeight: MediaQuery.of(context).size.width * 0.17,
         backgroundColor: const Color.fromARGB(255, 239, 144, 154), // light
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         surfaceTintColor: Colors.transparent,
         elevation: 2,
         shadowColor: Colors.black.withAlpha(200),
+        //below is corrected
+        actions: [
+          StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              return AccountButton(); // Always visible
+            },
+          ),
+        ],
+
         title: Text(
           'UNROLL',
           style: GoogleFonts.poppins(
@@ -45,7 +56,8 @@ class _HomePageState extends ConsumerState<HomePage> {
         ),
       ),
       body: pages[ref.watch(currentPageProvider)],
-      backgroundColor: Colors.white,
+
+      backgroundColor: Color.fromARGB(255, 250, 200, 204),
     );
   }
 }
