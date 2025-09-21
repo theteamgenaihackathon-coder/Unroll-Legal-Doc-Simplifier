@@ -28,7 +28,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: MediaQuery.of(context).size.width * 0.2,
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         surfaceTintColor: Colors.transparent,

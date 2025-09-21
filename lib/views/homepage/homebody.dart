@@ -17,40 +17,40 @@ class HomeBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     SvgPicture bgImage = SvgPicture.asset(
       'assets/images/bgimage2.svg',
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.36,
+      // width: MediaQuery.of(context).size.width * 0.01,
     );
 
     const Text getStarted = Text(
       "GET STARTED WITH A DOCUMENT NOW !!!",
       style: TextStyle(fontFamily: "ComingSoon", fontSize: 18),
+      textAlign: TextAlign.center,
     );
 
     Row buttonRow = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        UploadButton(),
-        SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-        CameraButton(),
-      ],
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [UploadButton(), CameraButton()],
     );
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 24,
-            right: 24,
-            top: 120,
-            bottom: 40,
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * 0.2,
+            ),
+            child: bgImage,
           ),
-          child: bgImage,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: getStarted,
-        ),
-        buttonRow,
-      ],
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+            ),
+            child: getStarted,
+          ),
+          buttonRow,
+        ],
+      ),
     );
   }
 }
